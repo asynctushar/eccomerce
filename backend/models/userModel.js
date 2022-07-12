@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
         default: "user"
     },
     resetPasswordToken: String,
-    resetPasswordExpire: Date
+    resetPasswordExpire: Date,
 })
 
 //Hash password before save
