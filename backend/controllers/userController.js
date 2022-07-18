@@ -69,7 +69,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     const resetPasswordUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
-    const message = `Your password reset url is: \n\n ${resetPasswordUrl} \n\n If you have not request this email then please ignore it.`;
+    const message = `Your password reset url is: \n\n ${resetPasswordUrl} \n\n If you have not requested this then please ignore it.`;
 
     try {
         await sendEmail({
