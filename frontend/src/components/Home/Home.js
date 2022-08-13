@@ -1,40 +1,46 @@
 import './Home.css';
 import { CgMouse } from 'react-icons/cg';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import Product from './Product';
-
-const product = {
-    name: "Blue T-Shirt",
-    price: "350 Taka",
-    _id: "1",
-    image: [{ url: "https://i.ibb.co/DRST11n/1.webp" }]
-}
+import Helmet from 'react-helmet';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProductsAction } from '../../redux/actions/productAction';
+import Loader from '../Loader/Loader';
 
 const Home = () => {
+    const products = useSelector((state) => state.productState.products);
+    const isLoading = useSelector((state) => state.appState.isLoading);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(updateProductsAction());
+    }, [dispatch]);
+
     return (
         <Fragment>
 
-            <div className="banner">
-                <p>Welcome to Ecommerce</p>
-                <h1>Find Amazing Products Below</h1>
-                <a href="#container">
-                    <button>
-                        Scroll <CgMouse />
-                    </button>
-                </a>
-            </div>
+            {isLoading  ? <Loader /> :
+                <Fragment>
+                    <Helmet title="Ecommerce" />
 
-            <h2 className="homeHeading">Feature Products</h2>
-            <div className="container" id="container">
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-                <Product product={product} />
-            </div>
+                    <div className="banner">
+                        <p>Welcome to Ecommerce</p>
+                        <h1>Find Amazing Products Below</h1>
+                        <a href="#container">
+                            <button>
+                                Scroll <CgMouse />
+                            </button>
+                        </a>
+                    </div>
+
+                    <h2 className="homeHeading">Feature Products</h2>
+                    <div className="container" id="container">
+                        {products && products.map(product => (
+                            <Product key={product._id} product={product} />
+                        ))}
+                    </div>
+                </Fragment>
+            }
         </Fragment>
     );
 }
