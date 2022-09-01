@@ -81,12 +81,13 @@
     border-radius: 1vmax;
     overflow: hidden !important;
     padding: 1vmax;
-    box-shadow: 0 0 5px rgba(156, 152, 152, 0.589);
+    box-shadow: 0 0 15px rgba(156, 152, 152, 0.2);
 
 }
 
 .productCard img {
-    width: 14vmax;
+    /* width: 14vmax; */
+    
 }
 
 .productCard div {
@@ -116,7 +117,7 @@
 }
 
 .productCard:hover {
-    box-shadow: 0 0 15px rgba(15, 15, 15, 0.589);
+    box-shadow: 0 0 15px rgba(15, 15, 15, 0.205);
 }
 
 @media screen and (max-width: 600px) {

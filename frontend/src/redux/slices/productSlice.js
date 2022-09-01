@@ -1,19 +1,23 @@
-import { createSlice , } from '@reduxjs/toolkit';
+import { createSlice, } from '@reduxjs/toolkit';
 
 const initialState = {
   products: [],
-  productCount: 0
+  productCount: 0,
+  product: {}
 }
 
 const productSlice = createSlice({
-    name: 'product',
-    initialState,
-    reducers: {
-      updateProducts: (state, action) => {
-        state.products = action.payload.products;
-        state.productCount = action.payload.productCount;
-        }
+  name: 'product',
+  initialState,
+  reducers: {
+    getAllProducts: (state, action) => {
+      state.products = action.payload.products;
+      state.productCount = action.payload.productCount;
+    },
+    getProductDetails: (state, action) => {
+      state.product = action.payload
     }
+  }
 
 });
 

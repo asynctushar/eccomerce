@@ -2,6 +2,7 @@ const app = require('./app');
 const dotenv = require('dotenv');
 const databaseConnect = require('./config/database');
 
+
 //Handling Uncaught Exceptions
 process.on('uncaughtException', (err) => {
     console.log(`Error: ${err.message}`)

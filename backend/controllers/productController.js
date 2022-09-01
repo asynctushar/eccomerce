@@ -32,7 +32,7 @@ exports.getAllProduct = catchAsyncErrors(async (req, res) => {
         success: true,
         products,
         productCount
-    })
+    });
 })
 
 //Update Product -- admin
