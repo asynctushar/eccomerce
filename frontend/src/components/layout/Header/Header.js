@@ -1,44 +1,129 @@
 import './Header.css';
-import { ReactNavbar } from 'overlay-navbar';
 import logo from '../../../images/logo.png';
+import { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import { ImSearch } from 'react-icons/im';
+import { FaShoppingCart } from 'react-icons/fa';
+import { NavLink, Link } from 'react-router-dom';
 
-const options = {
-    burgerColor: "#eb4034",
-    burgerColorHover: "#a62d24",
-    logo,
-    logoWidth: "20vmax",
-    logoHoverSize: "10px",
-    logoHoverColor: "#eb4034",
-    navColor1: "white",
-    link1Text: "Home",
-    link2Text: "Product",
-    link3Text: "Contact",
-    link4Text: "About",
-    link1Url: "/",
-    link2Url: "/product",
-    link3Url: "/contact",
-    link4Url: "/about",
-    link1Size: "1.3vmax",
-    link1Margin: "1vmax",
-    link1Color: "rgba(35, 35, 35, 0.8)",
-    link1ColorHover: "#eb4034",
-    searchIconColor: "rgba(35, 35, 35, 0.8)",
-    profileIconColor: "rgba(35, 35, 35, 0.8)",
-    cartIconColor: "rgba(35, 35, 35, 0.8)",
-    profileIconColorHover: "#eb4034",
-    searchIconColorHover: "#eb4034",
-    cartIconColorHover: "#eb4034",
-    cartIconMargin: "1vmax",
-    nav1justifyContent: "flex-end",
-    nav2justifyContent: "flex-end",
-    nav3justifyContent: "flex-start",
-    nav4justifyContent: "flex-start"
-}
+const pages = [
+    {
+        name: 'Home',
+        path: '/'
+    },
+    {
+        name: 'Products',
+        path: '/products'
+    }
+];
 
 const Header = () => {
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
     return (
-        <ReactNavbar {...options} />
+        <AppBar position="static" className="header">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters >
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                        <NavLink to="/" >
+                            <img src={logo} alt="logo" className="site-logo" />
+                        </NavLink>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">
+                                        <NavLink to={page.path}>
+                                            {page.name}
+                                        </NavLink>
+                                    </Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }}}>
+                        <NavLink to="/" >
+                            <img src={logo} alt="logo" className="site-logo" />
+                        </NavLink>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page.path}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                <NavLink to={page.path} >
+                                    {page.name}
+                                </NavLink>
+                            </Button>
+                        ))}
+                    </Box>
+                    <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
+                        <NavLink to="/search">
+                            <ImSearch />
+                        </NavLink>
+                    </Box>
+                    <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                        <FaShoppingCart />
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar >
     );
-}
+};
 
 export default Header;

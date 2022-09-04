@@ -165,6 +165,7 @@
   .reviews {
     display: flex;
     overflow: auto;
+    margin-bottom: 5vmax;
   }
   
   .review-card {

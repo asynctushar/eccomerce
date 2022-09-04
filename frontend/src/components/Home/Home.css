@@ -39,14 +39,15 @@
 
 .banner::after {
     content: "";
-    width: 100vw;
+    max-width: 100vw;
     height: 100vmin;
     background-color: white;
     position: absolute;
     top: 0%;
     left: 0%;
-    max-width: 100%;
+    min-width: 100%;
     clip-path: polygon(100% 68%, 0 100%, 100% 100%);
+    margin-top: 6rem;
 }
 
 .homeHeading {
@@ -63,10 +64,11 @@
 .container {
     display: flex;
     margin: 2vmax auto;
-    width: 80vw;
+    width: 100vw!important;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
+    margin-bottom : 5vmax;
 }
 
 .productCard {
@@ -86,20 +88,21 @@
 }
 
 .productCard img {
-    /* width: 14vmax; */
+    width: 12vmax;
     
 }
 
 .productCard div {
-    margin: .5vmax;
+    margin: .2vmax;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 
 .productCard>div>span {
-    font: 300 .7vmax "Roboto";
+    font: 400 .8vmax "Roboto";
 }
 
 .productCard p {

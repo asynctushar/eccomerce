@@ -26,13 +26,13 @@ const Home = () => {
     }
 
     return (
-        <Fragment>
+        <div>
             <Helmet title="Ecommerce" />
 
-            <div className="banner">
+            <div className="banner"> 
                 <p>Welcome to Ecommerce</p>
                 <h1>Find Amazing Products Below</h1>
-                <a href="#container">
+                 <a href="#container">
                     <button>
                         Scroll <CgMouse />
                     </button>
@@ -46,8 +46,8 @@ const Home = () => {
                         <ProductCard key={product._id} product={product} />
                     ))}
                 </div>
-            }
-        </Fragment>
+            } 
+        </div>
     );
 }
 

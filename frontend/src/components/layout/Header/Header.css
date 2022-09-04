@@ -1,3 +1,11 @@
-.menuBurger {
-    box-sizing: content-box !important;
+.site-logo {
+    width: 10rem;
+}
+
+.header {
+    background-image: linear-gradient(to right, #635dc0, #3027ae);
+    width: 100%;
+ }
+ .css-1t6c9ts {
+     justify-content: right;
 }

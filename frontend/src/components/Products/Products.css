@@ -1,0 +1,17 @@
+.products-heading {
+    margin: 2vmax auto;  
+    width: 15vw;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.171);
+    padding: 2vmax;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.6);
+    font: 500 1.5vmax "Roboto";
+
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 5vmax;
+}
