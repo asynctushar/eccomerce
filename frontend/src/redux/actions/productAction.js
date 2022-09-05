@@ -5,10 +5,12 @@ import axios from 'axios';
 const { getAllProducts, getProductDetails } = productSlice.actions;
 const { setLoader, setError, } = appSlice.actions;
 
-export const getAllProductsAction = () => async (dispatch) => {
+export const getAllProductsAction = (keyword = "", currentPage = 1) => async (dispatch) => {
+    let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+
     try {
         dispatch(setLoader(true));
-        const { data } = await axios.get('/api/v1/products');
+        const { data } = await axios.get(link);
         dispatch(getAllProducts(data));
         dispatch(setLoader(false))
 

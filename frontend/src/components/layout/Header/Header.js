@@ -109,10 +109,10 @@ const Header = () => {
                     </Box>
                     <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
                         <NavLink to="/search" style={({ isActive }) => ({
-                            color: isActive ? '#000' : '#fff',
-                            cursor: isActive? "unset": "pointer"
-                            
-                        })}> 
+                            color: isActive ? 'rgba(255, 255, 255, 0.674)' : '#fff',
+                            cursor: isActive ? "unset" : "pointer"
+
+                        })}>
                             <ImSearch />
                         </NavLink>
                     </Box>

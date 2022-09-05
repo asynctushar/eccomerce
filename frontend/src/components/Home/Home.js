@@ -7,7 +7,7 @@ import { getAllProductsAction } from '../../redux/actions/productAction';
 import { useAlert } from 'react-alert';
 import Loader from '../Loader/Loader';
 import { clearErrorAction } from '../../redux/actions/appAction';
-import ProductCard from './ProductCard';
+import ProductCard from '../Products/ProductCard';
 
 const Home = () => {
     const products = useSelector((state) => state.productState.products);

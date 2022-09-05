@@ -8,7 +8,7 @@
 
 .search .search-container {
     width: 60vw;
-    height: 5rem;
+    height: 4rem;
     background: #fff;
     border-radius: 40px;
     display: flex;
@@ -24,7 +24,7 @@
     border: none;
     width: 80%;   
     height: 100%;
-    font-size: 24px;
+    font-size: 1.1rem;
     color: rgb(26, 13, 13)
 }
 .search input:focus {
@@ -34,15 +34,27 @@
     font-size: 1rem;
 }
 
+.search button {
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background: transparent;
+}
+
 .search .search-icon {
     color: #3027aee5;
-    font-size: 60px;
+    font-size: 50px;
     cursor: pointer;
+}
+
+.search .search-icon:hover{
+    color: #1100ffe8;
 }
 
 @media  screen and (max-width: 768px) {
     .search .search-icon {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .search .search-container {

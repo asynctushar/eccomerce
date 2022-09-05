@@ -1,16 +1,28 @@
 import './Search.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom'
 
-const Search = () => {
+const Search = ({ history }) => {
+    const navigate = useNavigate();
+
+    const searchHandlar = (e) => {
+        e.preventDefault();
+        if (e.target[0].value.trim().length > 0) {
+            navigate(`/products/${e.target[0].value.trim()}`, { replace: true })
+        }
+    }
+
     return (
         <Fragment >
-            <div className="search">
+            <form className="search" onSubmit={searchHandlar}>
                 <div className="search-container">
                     <input type="text" placeholder="Find Amazing Products" />
-                    <SearchIcon className="search-icon" />
+                    <button>
+                        <SearchIcon className="search-icon" />
+                    </button>
                 </div>
-            </div>
+            </form>
         </Fragment>
     );
 }
