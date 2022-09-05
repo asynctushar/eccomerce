@@ -28,22 +28,17 @@ const pages = [
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+
 
     return (
         <AppBar position="static" className="header">
@@ -86,7 +81,7 @@ const Header = () => {
                             {pages.map((page) => (
                                 <MenuItem key={page.path} onClick={handleCloseNavMenu}>
                                     <Typography textAlign="center">
-                                        <NavLink to={page.path}>
+                                        <NavLink to={page.path} >
                                             {page.name}
                                         </NavLink>
                                     </Typography>
@@ -94,7 +89,7 @@ const Header = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' }}}>
+                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <NavLink to="/" >
                             <img src={logo} alt="logo" className="site-logo" />
                         </NavLink>
@@ -113,7 +108,11 @@ const Header = () => {
                         ))}
                     </Box>
                     <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
-                        <NavLink to="/search">
+                        <NavLink to="/search" style={({ isActive }) => ({
+                            color: isActive ? '#000' : '#fff',
+                            cursor: isActive? "unset": "pointer"
+                            
+                        })}> 
                             <ImSearch />
                         </NavLink>
                     </Box>
