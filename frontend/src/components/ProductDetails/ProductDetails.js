@@ -21,7 +21,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         dispatch(getProductDetailsAction(id));
-    }, [dispatch, error, id]);
+    }, [dispatch, id]);
 
     if (error) {
         alert.show(error.message);

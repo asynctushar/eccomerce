@@ -26,7 +26,7 @@ class ApiFeatures {
 
         //Filter for price and rating
         let queryCopyStr = JSON.stringify(queryCopy);
-        queryCopyStr = queryCopyStr.replace(/\b(gt|gte|lt|lte)\b/g, key => `$${key}`)
+        queryCopyStr = queryCopyStr.replace(/\b(gt|gte|lt|lte)\b/g, key => `$${key}`);
 
         this.query = this.query.find(JSON.parse(queryCopyStr));
 
@@ -37,7 +37,7 @@ class ApiFeatures {
         const currentPage = Number(this.queryStr.page) || 1;
         const skip = resultPerPage * (currentPage - 1);
 
-        this.query  = this.query.limit(resultPerPage).skip(skip);
+        this.query = this.query.limit(resultPerPage).skip(skip);
 
         return this;
 
