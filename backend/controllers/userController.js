@@ -4,19 +4,26 @@ const User = require('../models/userModel');
 const sendToken = require('../utils/sendToken');
 const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
-const Product = require('../models/productModel');
+const cloudinary = require('cloudinary').v2;
 
 //Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar } = req.body;
+
+    const myCloud = await cloudinary.uploader.upload(avatar, {
+        folder: '/avatars',
+        width: 150,
+        height: 150,
+        crop: "scale"
+    })
 
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "This is a sample id",
-            url: "this is a sample profile url"
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url
         }
     });
 
@@ -125,7 +132,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
     const { oldPassword, newPassword, confirmPassword } = req.body;
 
-    if (!oldPassword ) {
+    if (!oldPassword) {
         return next(new ErrorHandler('Please Enter old password.', 400));
     }
 

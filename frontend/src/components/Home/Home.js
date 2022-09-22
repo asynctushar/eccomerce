@@ -1,6 +1,6 @@
 import './Home.css';
 import { CgMouse } from 'react-icons/cg';
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProductsAction } from '../../redux/actions/productAction';

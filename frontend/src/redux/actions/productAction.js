@@ -9,11 +9,11 @@ export const getAllProductsAction = (keyword = "", currentPage = 1, priceRange =
 
     let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}`;
 
-    if (category !== 'All') {
+    if (category && category !== 'All') {
         link = link + `&category=${category}`;
     }
 
-    if (ratings !== null) {
+    if (ratings && ratings !== null) {
         link = link + `&ratings=${ratings}`;
     }
 

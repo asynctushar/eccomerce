@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { ImSearch } from 'react-icons/im';
 import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink, Link } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const pages = [
     {
@@ -101,7 +102,10 @@ const Header = () => {
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                <NavLink to={page.path} >
+                                <NavLink to={page.path} style={({ isActive }) => ({
+                                    color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                                    cursor: isActive ? "unset" : "pointer"
+                                })}>
                                     {page.name}
                                 </NavLink>
                             </Button>
@@ -109,16 +113,29 @@ const Header = () => {
                     </Box>
                     <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
                         <NavLink to="/search" style={({ isActive }) => ({
-                            color: isActive ? 'rgba(255, 255, 255, 0.674)' : '#fff',
+                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
                             cursor: isActive ? "unset" : "pointer"
-
                         })}>
                             <ImSearch />
                         </NavLink>
                     </Box>
                     <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
-                        <FaShoppingCart />
+                        <NavLink to='/cart' style={({ isActive }) => ({
+                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                            cursor: isActive ? "unset" : "pointer"
+                        })}>
+                            <FaShoppingCart />
+                        </NavLink>
                     </Box>
+                    <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                        <NavLink to='/login' style={({ isActive }) => ({
+                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                            cursor: isActive ? "unset" : "pointer"
+                        })}>
+                            <AccountCircleIcon sx={{ fontSize: '2rem' }} />
+                        </NavLink>
+                    </Box>
+
                 </Toolbar>
             </Container>
         </AppBar >

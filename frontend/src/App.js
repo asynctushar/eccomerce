@@ -9,6 +9,9 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 import { useSelector } from 'react-redux';
 import Products from './components/Products/Products';
 import Search from './components/Search/Search';
+import Cart from './components/Cart/Cart';
+import Auth from './components/Auth/Auth';
+import Account from './components/Account/Account';
 
 function App() {
     const isLoading = useSelector((state) => state.appState.isLoading);
@@ -30,6 +33,9 @@ function App() {
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:keyword" element={<Products />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/login" element={<Auth />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/cart" element={<Cart />} />
             </Routes>
             <Footer />
         </Router>
