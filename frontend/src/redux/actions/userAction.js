@@ -30,3 +30,29 @@ export const registerAction = (userInfo) => async (dispatch) => {
     }
 }
 
+export const loadUserAction = () => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        const { data } = await axios.get('/api/v1/me');
+        dispatch(login(data));
+        dispatch(setLoader(false));
+
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
+}
+
+export const logoutUserAction = () => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        await axios.get('/api/v1/logout');
+        dispatch(login({ user: null, isAuthenticated: false }));
+        dispatch(setLoader(false));
+
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
+}
+

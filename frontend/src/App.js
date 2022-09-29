@@ -6,22 +6,28 @@ import Header from './components/layout/Header/Header';
 import Footer from './components/layout/Footer/Footer';
 import Home from './components/Home/Home';
 import ProductDetails from './components/ProductDetails/ProductDetails';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Products from './components/Products/Products';
 import Search from './components/Search/Search';
 import Cart from './components/Cart/Cart';
 import Auth from './components/Auth/Auth';
 import Account from './components/Account/Account';
+import { loadUserAction } from './redux/actions/userAction';
+import ProtectedRoute from './components/route/ProtectedRoute';
 
-function App() {
-    const isLoading = useSelector((state) => state.appState.isLoading);
+const App = () => {
+    const dispatch = useDispatch();
+    const { isAuthenticated } = useSelector((state) => state.userState);
+    const { isLoading } = useSelector((state) => state.appState);
 
     useEffect(() => {
         WebFont.load({
             google: {
                 families: ['Roboto', 'Droid Sans', 'Droid Serif']
             }
-        })
+        });
+
+        dispatch(loadUserAction());
     }, []);
 
     return (
@@ -34,7 +40,10 @@ function App() {
                 <Route path="/products/:keyword" element={<Products />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/login" element={<Auth />} />
-                <Route path="/account" element={<Account />} />
+                <Route path="/account" element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                        <Account />
+                    </ProtectedRoute>} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>
             <Footer />

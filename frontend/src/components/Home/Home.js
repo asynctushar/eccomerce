@@ -28,7 +28,6 @@ const Home = () => {
     return (
         <div>
             <Helmet title="Ecommerce" />
-
             <div className="banner"> 
                 <p>Welcome to Ecommerce</p>
                 <h1>Find Amazing Products Below</h1>

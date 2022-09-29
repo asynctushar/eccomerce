@@ -15,6 +15,8 @@ import { ImSearch } from 'react-icons/im';
 import { FaShoppingCart } from 'react-icons/fa';
 import { NavLink, Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useSelector } from 'react-redux';
+import UserOptions from './UserOptions/UserOptions';
 
 const pages = [
     {
@@ -29,6 +31,7 @@ const pages = [
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const { isAuthenticated, user } = useSelector((state) => state.userState);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -43,7 +46,7 @@ const Header = () => {
 
     return (
         <AppBar position="static" className="header">
-            <Container maxWidth="xl">
+            <Container maxWidth="xl"  >
                 <Toolbar disableGutters >
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
                         <NavLink to="/" >
@@ -119,7 +122,9 @@ const Header = () => {
                             <ImSearch />
                         </NavLink>
                     </Box>
-                    <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                    <Box sx={{
+                        ml: "1rem", fontSize: '2rem', color: 'inherit'
+                    }}>
                         <NavLink to='/cart' style={({ isActive }) => ({
                             color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
                             cursor: isActive ? "unset" : "pointer"
@@ -128,11 +133,13 @@ const Header = () => {
                         </NavLink>
                     </Box>
                     <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
-                        <NavLink to='/login' style={({ isActive }) => ({
+                        <NavLink to={isAuthenticated ? '/account' : '/login'} style={({ isActive }) => ({
                             color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
                             cursor: isActive ? "unset" : "pointer"
                         })}>
-                            <AccountCircleIcon sx={{ fontSize: '2rem' }} />
+                            {isAuthenticated ? <UserOptions user={user} /> :
+                                <AccountCircleIcon sx={{ fontSize: '2rem' }} />
+                            }
                         </NavLink>
                     </Box>
 
