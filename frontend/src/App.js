@@ -14,6 +14,7 @@ import Auth from './components/Auth/Auth';
 import Account from './components/Account/Account';
 import { loadUserAction } from './redux/actions/userAction';
 import ProtectedRoute from './components/route/ProtectedRoute';
+import UpdateAccount from './components/Account/UpdateAccount/UpdateAccount';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -43,6 +44,11 @@ const App = () => {
                 <Route path="/account" element={
                     <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
                         <Account />
+                    </ProtectedRoute>} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/me/update" element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                        <UpdateAccount />
                     </ProtectedRoute>} />
                 <Route path="/cart" element={<Cart />} />
             </Routes>

@@ -2,9 +2,10 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register } = userSlice.actions;
+const { login, register, updateUser, resetUpdateStatus } = userSlice.actions;
 const { setLoader, setError, } = appSlice.actions;
 
+// Login User
 export const loginAction = (email, password) => async (dispatch) => {
     try {
         dispatch(setLoader(true));
@@ -17,6 +18,8 @@ export const loginAction = (email, password) => async (dispatch) => {
         dispatch(setLoader(false));
     }
 }
+
+// Register User
 export const registerAction = (userInfo) => async (dispatch) => {
     try {
         dispatch(setLoader(true));
@@ -30,6 +33,7 @@ export const registerAction = (userInfo) => async (dispatch) => {
     }
 }
 
+// Load user from cookies
 export const loadUserAction = () => async (dispatch) => {
     try {
         dispatch(setLoader(true));
@@ -43,6 +47,7 @@ export const loadUserAction = () => async (dispatch) => {
     }
 }
 
+// LogOut User
 export const logoutUserAction = () => async (dispatch) => {
     try {
         dispatch(setLoader(true));
@@ -56,3 +61,21 @@ export const logoutUserAction = () => async (dispatch) => {
     }
 }
 
+// Update User
+export const updateUserAction = (userData) => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        const { data } = await axios.put('/api/v1/me/update', userData, { headers: { "Content-Type": "application/json" } });
+        dispatch(updateUser(data));
+        dispatch(setLoader(false));
+
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
+}
+
+// reset update status while browsing into account page
+export const resetUpdateStatusAction = () => dispatch => {
+    dispatch(resetUpdateStatus());
+}

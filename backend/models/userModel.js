@@ -26,11 +26,11 @@ const userSchema = new mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true
+            default: 'not uploaded'
         },
         url: {
             type: String,
-            required: true
+            default: 'not uploaded'
         }
     },
     createdAt: {
@@ -61,11 +61,11 @@ userSchema.methods.generateAuthToken = function () {
 
 //Compare password with the given password
 userSchema.methods.comparePassword = async function (givenPassword) {
-    return await bcrypt.compare( givenPassword, this.password)
+    return await bcrypt.compare(givenPassword, this.password)
 }
 
 //Generating password reset token
-userSchema.methods.getResetPasswordToken = function() {
+userSchema.methods.getResetPasswordToken = function () {
     const resetToken = crypto.randomBytes(20).toString("hex");
 
     this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');

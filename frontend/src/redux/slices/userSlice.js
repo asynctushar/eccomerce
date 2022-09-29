@@ -2,7 +2,8 @@ import { createSlice, } from '@reduxjs/toolkit';
 
 const initialState = {
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    isUpdated: null
 }
 
 const userSlice = createSlice({
@@ -16,9 +17,15 @@ const userSlice = createSlice({
         register: (state, action) => {
             state.user = action.payload.user;
             state.isAuthenticated = action.payload.success;
+        },
+        updateUser: (state, action) => {
+            state.user = action.payload.updatedUser;
+            state.isUpdated = true;
+        },
+        resetUpdateStatus: (state, action) => {
+            state.isUpdated = null;
         }
     }
-
 });
 
 export default userSlice;

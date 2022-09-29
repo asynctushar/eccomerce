@@ -1,14 +1,19 @@
 import './Account.css';
-import { Fragment } from "react";
-import {useSelector } from 'react-redux';
+import { Fragment, useEffect } from "react";
+import {useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MetaData from '../layout/MetaData';
 import Loader from "../Loader/Loader";
+import { resetUpdateStatusAction } from '../../redux/actions/userAction';
 
 const Account = () => {
     const { user } = useSelector((state) => state.userState);
     const { isLoading } = useSelector((state) => state.appState);
+    const dispatch = useDispatch();
   
+    useEffect(() => {
+        dispatch(resetUpdateStatusAction());
+    }, [])
 
     return (
         <Fragment>
