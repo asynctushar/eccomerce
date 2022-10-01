@@ -22,6 +22,11 @@ const userSlice = createSlice({
             state.user = action.payload.updatedUser;
             state.isUpdated = true;
         },
+        updatePassword: (state, action) => {
+            
+            state.user = action.payload.user;
+            state.isUpdated = true;
+        },
         resetUpdateStatus: (state, action) => {
             state.isUpdated = null;
         }

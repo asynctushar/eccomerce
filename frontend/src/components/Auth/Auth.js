@@ -21,7 +21,8 @@ const LogIn = () => {
         confirmPassword: ""
     });
     const { name, email, password, confirmPassword } = user;
-    const [avatar, setAvatar] = useState(AvatarPreview);
+    const [avatar, setAvatar] = useState('');
+    const [avatarPrev, setAvatarPrev] = useState(AvatarPreview);
 
     const dispatch = useDispatch();
     const { error, isLoading } = useSelector(state => state.appState);
@@ -39,7 +40,7 @@ const LogIn = () => {
     }, [dispatch, isAuthenticated]);
 
     if (error) {
-        alert.show(error.message);
+        alert.show(error.response.data.message);
         dispatch(clearErrorAction());
     }
 
@@ -52,7 +53,7 @@ const LogIn = () => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            return alert('password does not match')
+            return alert.show('password does not match')
         }
 
         const userInfo = {
@@ -72,6 +73,7 @@ const LogIn = () => {
 
             reader.onloadend = (e) => {
                 setAvatar(reader.result);
+                setAvatarPrev(reader.result);
             };
 
         } else {
@@ -145,7 +147,7 @@ const LogIn = () => {
                                     <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required onChange={registerFormChange} />
                                 </div>
                                 <div className="regFileUpload">
-                                    <img src={avatar} alt="Avatar" />
+                                    <img src={avatarPrev} alt="Avatar" />
                                     <input type="file" name="avatar" placeholder="Upload avatar" accept="image/*" onChange={registerFormChange} />
                                 </div>
                                 <button className="register-button">

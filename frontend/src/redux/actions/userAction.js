@@ -2,7 +2,7 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register, updateUser, resetUpdateStatus } = userSlice.actions;
+const { login, register, updateUser, updatePassword, resetUpdateStatus } = userSlice.actions;
 const { setLoader, setError, } = appSlice.actions;
 
 // Login User
@@ -67,6 +67,19 @@ export const updateUserAction = (userData) => async (dispatch) => {
         dispatch(setLoader(true));
         const { data } = await axios.put('/api/v1/me/update', userData, { headers: { "Content-Type": "application/json" } });
         dispatch(updateUser(data));
+        dispatch(setLoader(false));
+
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
+}
+// Update Passord
+export const updatePasswordAction = (passwords) => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        const { data } = await axios.put('/api/v1/password/update', passwords, { headers: { "Content-Type": "application/json" } });
+        dispatch(updatePassword(data));
         dispatch(setLoader(false));
 
     } catch (err) {

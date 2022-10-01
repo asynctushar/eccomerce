@@ -9,23 +9,29 @@ const cloudinary = require('cloudinary').v2;
 //Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     const { name, email, password, avatar } = req.body;
+    const userData = { name, email, password }
 
-    const myCloud = await cloudinary.uploader.upload(avatar, {
-        folder: '/avatars',
-        width: 1000,
-        height: 1000,
-        crop: "scale"
-    })
+    if (avatar) {
+        const myCloud = await cloudinary.uploader.upload(avatar, {
+            folder: '/avatars',
+            width: 1000,
+            height: 1000,
+            crop: "scale"
+        })
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar: {
-            public_id: myCloud.public_id,
-            url: myCloud.secure_url
+        userData = {
+            name,
+            email,
+            password,
+            avatar: {
+                public_id: myCloud.public_id,
+                url: myCloud.secure_url
+            }
         }
-    });
+
+    }
+
+    const user = await User.create(userData);
 
     sendToken(user, 201, res);
 })
@@ -137,19 +143,21 @@ exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
     }
 
     const user = await User.findById(req.user.id).select("+password");
+
     const isMatchPassword = await user.comparePassword(oldPassword);
 
     if (!isMatchPassword) {
-        return next(new ErrorHandler("Old password is incorrect."), 404);
+        return next(new ErrorHandler("Old password is incorrect."), 400);
     }
 
-    if (req.body.newPassword !== req.body.confirmPassword) {
+    if (newPassword !== confirmPassword) {
         return next(new ErrorHandler("New password does not match with confirm password."), 400);
     }
 
-    user.password = req.body.newPassword;
+    user.password = newPassword;
 
-    await user.save();
+   await user.save();
+
     sendToken(user, 200, res);
 })
 
@@ -157,6 +165,9 @@ exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
 //update user profile
 exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     let { name, email, avatar } = req.body;
+    let userData = { name, email }
+
+    console.log(avatar)
 
     if (avatar) {
 
@@ -174,9 +185,12 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
 
         const imageId = req.user.avatar.public_id;
         await cloudinary.uploader.destroy(public_id);
+
+        userData = { name, email, avatar }
     }
 
-    const user = await User.findByIdAndUpdate(req.user.id, { name, email,avatar }, {
+
+    const user = await User.findByIdAndUpdate(req.user.id, userData, {
         new: true,
         runValidators: true,
         useFindAndModify: false

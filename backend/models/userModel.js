@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
         },
         url: {
             type: String,
-            default: 'not uploaded'
+            default: "not uploaded"
         }
     },
     createdAt: {

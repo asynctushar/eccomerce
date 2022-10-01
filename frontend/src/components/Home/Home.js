@@ -21,7 +21,7 @@ const Home = () => {
     }, [dispatch, alert]);
 
     if (error) {
-        alert.show(error.message);
+        alert.show(error.response.data.message);
         dispatch(clearErrorAction());
     }
 

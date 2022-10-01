@@ -24,7 +24,7 @@ const ProductDetails = () => {
     }, [dispatch, id]);
 
     if (error) {
-        alert.show(error.message);
+        alert.show(error.response.data.message);
         dispatch(clearErrorAction());
     }
 
