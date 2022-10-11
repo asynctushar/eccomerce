@@ -5,10 +5,10 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import AvatarPreview from '../../images/Profile.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction, registerAction } from '../../redux/actions/userAction';
+import { loginAction, registerAction, resetForgotPasswordStatusAction } from '../../redux/actions/userAction';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../redux/actions/appAction';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Loader from '../Loader/Loader';
 
 const LogIn = () => {
@@ -37,6 +37,8 @@ const LogIn = () => {
         if (isAuthenticated) {
             navigate('/account');
         }
+
+        dispatch(resetForgotPasswordStatusAction());
     }, [dispatch, isAuthenticated]);
 
     if (error) {
@@ -120,9 +122,9 @@ const LogIn = () => {
                                 </div>
                                 <div className="loginPassword">
                                     <LockOpenIcon />
-                                    <input type="loginPassword" name="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                    <input type="password" name="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                                 </div>
-                                <a href="#" className="forget-password">Forget Password?</a>
+                                <NavLink to="/password/forgot" className="forget-password" >Forget Password?</NavLink>
                                 <button className="login-button">
                                     Log In
                                 </button>

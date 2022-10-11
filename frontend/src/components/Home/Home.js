@@ -18,7 +18,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAllProductsAction());
-    }, [dispatch, alert]);
+    }, [dispatch]);
 
     if (error) {
         alert.show(error.response.data.message);

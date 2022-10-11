@@ -122,6 +122,7 @@
     align-self: flex-end;
     transition: all 0.5s;
     font: 500 1vmax "Gill Sans";
+    font-size: .9rem;
 }
 
 .forget-password:hover {

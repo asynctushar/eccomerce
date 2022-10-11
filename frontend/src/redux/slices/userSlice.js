@@ -29,7 +29,18 @@ const userSlice = createSlice({
         },
         resetUpdateStatus: (state, action) => {
             state.isUpdated = null;
+        },
+        forgotPassword: (state, action) => {
+            state.forgotPasswordMessage = action.payload;
+        },
+        resetForgotPasswordStatus: (state, action) => {
+            state.forgotPasswordMessage = null;
+        },
+        resetPassword: (state, action) => {
+            state.isUpdated = true;
+            state.forgotPasswordMessage = action.payload;
         }
+        
     }
 });
 

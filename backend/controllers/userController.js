@@ -81,7 +81,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get('host')}/api/v1/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
     const message = `Your password reset url is: \n\n ${resetPasswordUrl} \n\n If you have not requested this then please ignore it.`;
 
     try {
@@ -123,7 +123,10 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     await user.save();
 
-    sendToken(user, 200, res);
+    res.status(200).json({
+        success: true,
+        message: "Password reset success."
+    })
 })
 
 //Get user details
@@ -167,8 +170,6 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     let { name, email, avatar } = req.body;
     let userData = { name, email }
 
-    console.log(avatar)
-
     if (avatar) {
 
         const myCloud = await cloudinary.uploader.upload(avatar, {
@@ -184,7 +185,7 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
         }
 
         const imageId = req.user.avatar.public_id;
-        await cloudinary.uploader.destroy(public_id);
+        await cloudinary.uploader.destroy(imageId);
 
         userData = { name, email, avatar }
     }

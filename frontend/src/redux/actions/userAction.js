@@ -2,8 +2,8 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register, updateUser, updatePassword, resetUpdateStatus } = userSlice.actions;
-const { setLoader, setError, } = appSlice.actions;
+const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword } = userSlice.actions;
+const { setLoader, setError } = appSlice.actions;
 
 // Login User
 export const loginAction = (email, password) => async (dispatch) => {
@@ -42,7 +42,6 @@ export const loadUserAction = () => async (dispatch) => {
         dispatch(setLoader(false));
 
     } catch (err) {
-        dispatch(setError(err));
         dispatch(setLoader(false));
     }
 }
@@ -91,4 +90,35 @@ export const updatePasswordAction = (passwords) => async (dispatch) => {
 // reset update status while browsing into account page
 export const resetUpdateStatusAction = () => dispatch => {
     dispatch(resetUpdateStatus());
+}
+
+// forget password email message send
+export const forgotPasswordAction = (email) => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        const { data } = await axios.post('/api/v1/password/recovery', email, { headers: { "Content-Type": "application/json" } });
+        dispatch(forgotPassword(data));
+        dispatch(setLoader(false));
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
+}
+
+// clear forget password status 
+export const resetForgotPasswordStatusAction = () => (dispatch) => {
+    dispatch(resetForgotPasswordStatus());
+}
+
+// reset password from mail link
+export const resetPasswordAction = (token, passwords) => async (dispatch) => {
+    try {
+        dispatch(setLoader(true));
+        const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, { headers: { "Content-Type": "application/json" } });
+        dispatch(resetPassword(data));
+        dispatch(setLoader(false));
+    } catch (err) {
+        dispatch(setError(err));
+        dispatch(setLoader(false));
+    }
 }

@@ -16,6 +16,8 @@ import { loadUserAction } from './redux/actions/userAction';
 import ProtectedRoute from './components/route/ProtectedRoute';
 import UpdateAccount from './components/Account/UpdateAccount/UpdateAccount';
 import UpdatePassword from './components/Account/UpdatePassword/UpdatePassword';
+import ForgotPassword from './components/Auth/ForgotPassword/ForgotPassword';
+import ResetPassword from './components/Auth/ResetPassword/ResetPassword';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -42,6 +44,8 @@ const App = () => {
                 <Route path="/products/:keyword" element={<Products />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/login" element={<Auth />} />
+                <Route path="/password/forgot" element={<ForgotPassword />} />
+                <Route path="/password/reset/:token" element={<ResetPassword />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/account" element={
                     <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
