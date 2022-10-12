@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 
-const UpdatePassword = () => {
+const ResetPassword = () => {
     const dispatch = useDispatch();
     const { isUpdated, forgotPasswordMessage } = useSelector(state => state.userState);
     const { error, isLoading } = useSelector(state => state.appState);
@@ -19,7 +19,7 @@ const UpdatePassword = () => {
     const [password, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const updatePasswordSubmit = (e) => {
+    const resetPasswordSubmit = (e) => {
         e.preventDefault();
 
         if (password.length < 8 && confirmPassword.length < 8) {
@@ -48,10 +48,10 @@ const UpdatePassword = () => {
     return (
         <Fragment >
             {isLoading ? <Loader /> :
-                <div className="update-password">
-                    <div className="update-form-container">
-                        <h3 className="update-password-heading">Reset password</h3>
-                        <form className="update-password-form" onSubmit={updatePasswordSubmit}>
+                <div className="reset-password">
+                    <div className="reset-password-form-container">
+                        <h3 className="reset-password-heading">Reset password</h3>
+                        <form className="reset-password-form" onSubmit={resetPasswordSubmit}>
                             <div className="regPassword">
                                 <LockOpenIcon />
                                 <input type="password" name="password" placeholder="New Password" value={password} required onChange={(e) => setNewPassword(e.target.value)} />
@@ -60,7 +60,7 @@ const UpdatePassword = () => {
                                 <LockOpenIcon />
                                 <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required onChange={(e) => setConfirmPassword(e.target.value)} />
                             </div>
-                            <button className="update-password-button">
+                            <button className="reset-password-button">
                                 Reset
                             </button>
                         </form>
@@ -71,4 +71,4 @@ const UpdatePassword = () => {
     );
 }
 
-export default UpdatePassword;
+export default ResetPassword;

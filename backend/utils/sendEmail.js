@@ -7,7 +7,7 @@ const sendEmail = async (options) => {
             user: process.env.SMPT_MAIL,
             pass: process.env.SMPT_PASSWORD
         },
-        secure: true
+        port: 587
     })
 
     const mailOptions = {

@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
+import Tooltip from '@mui/material/Tooltip';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -32,6 +33,7 @@ const pages = [
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const { isAuthenticated, user } = useSelector((state) => state.userState);
+    const { cartItems } = useSelector((state) => state.cartState);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -115,32 +117,38 @@ const Header = () => {
                         ))}
                     </Box>
                     <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
-                        <NavLink to="/search" style={({ isActive }) => ({
-                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
-                            cursor: isActive ? "unset" : "pointer"
-                        })}>
-                            <ImSearch />
-                        </NavLink>
+                        <Tooltip title="Search">
+                            <NavLink to="/search" style={({ isActive }) => ({
+                                color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                                cursor: isActive ? "unset" : "pointer"
+                            })}>
+                                <ImSearch />
+                            </NavLink>
+                        </Tooltip>
                     </Box>
                     <Box sx={{
                         ml: "1rem", fontSize: '2rem', color: 'inherit'
                     }}>
-                        <NavLink to='/cart' style={({ isActive }) => ({
-                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
-                            cursor: isActive ? "unset" : "pointer"
-                        })}>
-                            <FaShoppingCart />
-                        </NavLink>
+                        <Tooltip title={cartItems.length > 0 ? `Cart(${cartItems.length})` : "Cart"} >
+                            <NavLink to='/cart' style={({ isActive }) => ({
+                                color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                                cursor: isActive ? "unset" : "pointer"
+                            })}>
+                                <FaShoppingCart />
+                            </NavLink>
+                        </Tooltip>
                     </Box>
                     <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
-                        <NavLink to={isAuthenticated ? '/account' : '/login'} style={({ isActive }) => ({
-                            color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
-                            cursor: isActive ? "unset" : "pointer"
-                        })}>
-                            {isAuthenticated ? <UserOptions user={user} /> :
-                                <AccountCircleIcon sx={{ fontSize: '2rem' }} />
-                            }
-                        </NavLink>
+                        <Tooltip title={isAuthenticated ? "" : "Login"}>
+                            <NavLink to={isAuthenticated ? '/account' : '/login'} style={({ isActive }) => ({
+                                color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                                cursor: isActive ? "unset" : "pointer"
+                            })}>
+                                {isAuthenticated ? <UserOptions user={user} /> :
+                                    <AccountCircleIcon sx={{ fontSize: '2rem' }} />
+                                }
+                            </NavLink>
+                        </Tooltip>
                     </Box>
 
                 </Toolbar>
