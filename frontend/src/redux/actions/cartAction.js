@@ -2,8 +2,8 @@ import axios from "axios";
 import appSlice from "../slices/appSlice";
 import cartSlice from "../slices/cartSlice";
 
-const { setError, setLoader } = appSlice.actions;
-const { addCartItem, removeCartItem } = cartSlice.actions;
+const { setError } = appSlice.actions;
+const { addCartItem, removeCartItem, saveShippingInfo } = cartSlice.actions;
 
 // Add to cart
 export const addCartItemAction = (quantity, id) => async (dispatch, getState) => {
@@ -32,4 +32,10 @@ export const removeCartItemAction = (id) => async (dispatch, getState) => {
 
     dispatch(removeCartItem(id));
     localStorage.setItem("cartItems", JSON.stringify(getState().cartState.cartItems));
+}
+
+// Save Shipping Info 
+export const saveShippingInfoAction = (data) => (dispatch, getState) => {
+    dispatch(saveShippingInfo(data));
+    localStorage.setItem("shippingInfo", JSON.stringify(data));
 }

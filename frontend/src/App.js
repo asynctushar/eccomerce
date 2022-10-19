@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Products from './components/Products/Products';
 import Search from './components/Search/Search';
 import Cart from './components/Cart/Cart';
+import Shipping from './components/Shipping/Shipping.js';
 import Auth from './components/Auth/Auth';
 import Account from './components/Account/Account';
 import { loadUserAction } from './redux/actions/userAction';
@@ -18,6 +19,8 @@ import UpdateAccount from './components/Account/UpdateAccount/UpdateAccount';
 import UpdatePassword from './components/Account/UpdatePassword/UpdatePassword';
 import ForgotPassword from './components/Auth/ForgotPassword/ForgotPassword';
 import ResetPassword from './components/Auth/ResetPassword/ResetPassword';
+import ConfirmOrder from './components/Shipping/ConfirmOrder/ConfirmOrder';
+
 
 const App = () => {
     const dispatch = useDispatch();
@@ -36,6 +39,7 @@ const App = () => {
 
     return (
         <Router>
+            <div className="app">
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -59,8 +63,17 @@ const App = () => {
                     <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
                         <UpdatePassword />
                     </ProtectedRoute>} />
+                <Route path="/shipping" element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                        <Shipping />
+                    </ProtectedRoute>} />
+                <Route path="/order/confirm" element={
+                    <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                        <ConfirmOrder />
+                    </ProtectedRoute>} />
             </Routes>
             <Footer />
+            </div>
         </Router>
     );
 }

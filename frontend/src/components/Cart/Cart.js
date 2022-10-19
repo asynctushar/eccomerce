@@ -3,10 +3,16 @@ import { Fragment } from 'react';
 import CartItemCard from './CartItemCard/CartItemCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { addCartItemAction, removeCartItemAction } from '../../redux/actions/cartAction';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import MetaData from '../layout/MetaData';
 
 const Cart = () => {
     const { cartItems } = useSelector(state => state.cartState);
+    const { isAuthenticated } = useSelector(state => state.userState);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const increaseQuantity = (id, quantity, stock) => {
         const newQuantity = quantity + 1;
@@ -26,10 +32,25 @@ const Cart = () => {
         dispatch(removeCartItemAction(id));
     }
 
+    const checkoutHandler = () => {
+        const redirect = isAuthenticated ? "/shipping" : '/login?redirect=shipping';
+        navigate(redirect);
+    }
+
     return (
         <Fragment>
-            {cartItems.length <= 0 ? "cart item not exist" :
+            {cartItems.length <= 0 ?
+                <Fragment>
+                    <MetaData title="Cart"/>
+                <div className="empty-cart">
+                    <RemoveShoppingCartIcon />
+                    <Typography>No Product In Your Cart</Typography>
+                    <Link to="/products">View Products</Link>
+                    </div>
+                    </Fragment>
+                :
                 <Fragment >
+                    <MetaData title="Cart"/>
                     <div className="cart">
                         <div className="cart-header">
                             <p>Product</p>
@@ -59,7 +80,7 @@ const Cart = () => {
                             </div>
                             <div></div>
                             <div className="checkout-btn">
-                                <button>Check Out</button>
+                                <button onClick={checkoutHandler}>Check Out</button>
                             </div>
                         </div>
                     </div>

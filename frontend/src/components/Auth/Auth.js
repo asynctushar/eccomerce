@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginAction, registerAction, resetForgotPasswordStatusAction } from '../../redux/actions/userAction';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../redux/actions/appAction';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import Loader from '../Loader/Loader';
 
 const LogIn = () => {
@@ -29,13 +29,16 @@ const LogIn = () => {
     const isAuthenticated = useSelector(state => state.userState.isAuthenticated);
     const alert = useAlert();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const loginRef = useRef();
     const registerRef = useRef(null);
 
+    
     useEffect(() => {
+        const redirect = location.search ? `/${location.search.split("=")[1]}` : "/account";
         if (isAuthenticated) {
-            navigate('/account');
+            navigate(redirect);
         }
 
         dispatch(resetForgotPasswordStatusAction());
@@ -118,7 +121,7 @@ const LogIn = () => {
                             <form className="login-form active" ref={loginRef} onSubmit={loginHandler}>
                                 <div className="loginEmail">
                                     <MailOutlineIcon />
-                                    <input type="loginEmail" name="email" placeholder="Email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                    <input type="email" name="email" placeholder="Email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
                                 </div>
                                 <div className="loginPassword">
                                     <LockOpenIcon />
