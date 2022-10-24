@@ -1,5 +1,4 @@
 const app = require('./app');
-const dotenv = require('dotenv');
 const databaseConnect = require('./config/database');
 const cloudinary = require('cloudinary').v2;
 
@@ -10,9 +9,6 @@ process.on('uncaughtException', (err) => {
 
     process.exit(1)
 })
-
-//config
-dotenv.config({ path: "backend/config/config.env" })
 
 //database connect 
 databaseConnect();
@@ -29,7 +25,6 @@ cloudinary.config({
 const server = app.listen(process.env.PORT, () => {
     console.log("App started at http://localhost:" + process.env.PORT)
 })
-
 
 //Unhandled Promise Rejection
 process.on('unhandledRejection', (err) => {

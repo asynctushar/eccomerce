@@ -7,6 +7,10 @@ const updateStock = require("../utils/updateStock");
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     const { shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body;
 
+    if (!paymentInfo) {
+        return next(new ErrorHandler("Please make payment first.", 400));
+    }
+
     const order = await Order.create({
         shippingInfo,
         orderItems,
@@ -17,7 +21,6 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
         totalPrice,
         paidAt: Date.now(),
         user: req.user.id,
-
     });
 
     res.status(201).json({
