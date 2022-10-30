@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { useAlert } from 'react-alert';
 import CheckoutSteps from '../Shipping/CheckoutSteps/CheckoutSteps';
 import { useSelector, useDispatch } from 'react-redux';
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import MetaData from '../layout/MetaData';
 import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { CreditCard, VpnKey, Event } from '@mui/icons-material';
@@ -89,7 +89,7 @@ const Payment = () => {
 
         } catch (err) {
             payBtn.current.disabled = false;
-            alert.error(err.message);
+            alert.error(err.response.data.message);
         }
 
     }

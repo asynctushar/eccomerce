@@ -138,18 +138,23 @@ const Header = () => {
                             </NavLink>
                         </Tooltip>
                     </Box>
-                    <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
-                        <Tooltip title={isAuthenticated ? "" : "Login"}>
-                            <NavLink to={isAuthenticated ? '/account' : '/login'} style={({ isActive }) => ({
-                                color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
-                                cursor: isActive ? "unset" : "pointer"
-                            })}>
-                                {isAuthenticated ? <UserOptions user={user} /> :
+                    {!isAuthenticated &&
+                        <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                            <Tooltip title={isAuthenticated ? "" : "Login"}>
+                                <NavLink to="/login" style={({ isActive }) => ({
+                                    color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
+                                    cursor: isActive ? "unset" : "pointer"
+                                })}>
                                     <AccountCircleIcon sx={{ fontSize: '2rem' }} />
-                                }
-                            </NavLink>
-                        </Tooltip>
-                    </Box>
+                                </NavLink>
+                            </Tooltip>
+                        </Box>
+                    }
+                    {isAuthenticated &&
+                        <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                            <UserOptions user={user} />
+                        </Box>
+                    }
 
                 </Toolbar>
             </Container>

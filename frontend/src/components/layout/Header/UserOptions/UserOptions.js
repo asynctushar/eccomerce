@@ -2,8 +2,9 @@ import './UserOptions.css';
 import { Fragment, useState } from "react";
 import { SpeedDial, SpeedDialAction, Backdrop } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
 import ListAltIcon from '@mui/icons-material/ListAlt';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logoutUserAction } from '../../../../redux/actions/userAction';
 
@@ -12,19 +13,24 @@ const UserOptions = ({ user }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const account = () => {
+        navigate('/account');
+    }
+
+    const orders = () => {
+        navigate('/orders');
+    }
+
+    const logoutUser = () => {
+        dispatch(logoutUserAction());
+    }
+
     const options = [
+        { icon: <PersonIcon />, name: "Account", func: account },
         { icon: <ListAltIcon />, name: "Orders", func: orders },
         { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
     ];
 
-
-    function orders() {
-        navigate("/orders");
-    }
-
-    function logoutUser() {
-        dispatch(logoutUserAction());
-    }
 
 
     return (

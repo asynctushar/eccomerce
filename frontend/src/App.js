@@ -25,6 +25,7 @@ import Payment from './components/Payment/Payment';
 import OrderSuccess from './components/Payment/OrderSuccess';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Orders from './components/Orders/Orders';
 
 
 const App = () => {
@@ -93,6 +94,10 @@ const App = () => {
                     <Route path="/payment/success" element={
                         <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
                             <OrderSuccess />
+                        </ProtectedRoute>} />
+                    <Route path="/orders" element={
+                        <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <Orders />
                         </ProtectedRoute>} />
                 </Routes>
                 <Footer />
