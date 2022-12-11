@@ -3,7 +3,7 @@ import appSlice from "../slices/appSlice";
 import orderSlice from "../slices/orderSlice";
 
 const { setError, setLoader } = appSlice.actions;
-const { createNewOrder, getMyOrders } = orderSlice.actions;
+const { createNewOrder, getMyOrders, getSingleOrder } = orderSlice.actions;
 
 // Create New Order
 export const createNewOrderAction = (order) => async (dispatch) => {
@@ -25,6 +25,17 @@ export const getMyOrdersAction = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/api/v1/me/orders');
         dispatch(getMyOrders(data.orders));
+        
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// Get Single Order
+export const getSingleOrderAction = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/api/v1/order/${id}`);
+        dispatch(getSingleOrder(data.order));
         
     } catch (err) {
         dispatch(setError(err));

@@ -1,14 +1,17 @@
+import { Fragment } from "react";
 import { Navigate } from "react-router";
-import Loader from "../Loader/Loader";
 
-const ProtectedRoute = ({ isAuthenticated, isLoading, children }) => {
-    if (isLoading) {
-        return <Loader />;
-    } else if (!isAuthenticated && !isLoading) {
-        return <Navigate to="/login" />
-    }
+const ProtectedRoute = ({ isAdmin, user, isAuthenticated, isLoading, children }) => {
+    return (
+        <Fragment>
+            {!isAdmin && !isLoading && isAuthenticated && children}
+            {isAdmin && !isLoading && isAuthenticated && user.role === "admin" && children}
+            {!isLoading && !isAuthenticated && <Navigate to="/login" />}
+            {isAdmin && !isLoading && isAuthenticated && user.role !== "admin" && <Navigate to="/login" />}
+        </Fragment>
+    )
 
-    return children;
+
 }
 
 export default ProtectedRoute;

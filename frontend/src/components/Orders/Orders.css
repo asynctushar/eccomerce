@@ -48,6 +48,14 @@
   .MuiDataGrid-iconSeparator {
     display: none !important;
   }
+
+  .greenColor > div{
+      color: green!important;
+  }
+
+  .redColor > div{
+      color: red!important;
+  }
   
   @media screen and (max-width: 600px) {
     .my-orders {

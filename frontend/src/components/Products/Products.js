@@ -14,7 +14,7 @@ const categoryList = ['All', 'Laptop', 'PC', 'Mobile', 'Accessories', 'Games', '
 
 const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [priceRange, setPriceRange] = useState([0, 200000]);
+    const [priceRange, setPriceRange] = useState([0, 1000000]);
     const [category, setCategory] = useState('All');
     const [rating, setRating] = useState(null);
 
@@ -79,7 +79,7 @@ const Products = () => {
                 <Slider
                     size="small"
                     min={0}
-                    max={100000}
+                    max={1000000}
                     value={priceRange}
                     aria-labelledby="range-slider"
                     valueLabelDisplay="auto"

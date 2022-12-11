@@ -73,6 +73,7 @@
 
 .productCard {
     width: 14vmax;
+    height: 21vmax;
     display: flex;
     flex-direction: column;
     text-decoration: none;
@@ -89,7 +90,8 @@
 
 .productCard img {
     width: 12vmax;
-    
+    height: 12vmax;
+    object-fit: cover;
 }
 
 .productCard div {

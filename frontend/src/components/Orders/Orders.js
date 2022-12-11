@@ -11,7 +11,6 @@ import { clearErrorAction } from '../../redux/actions/appAction';
 import { getMyOrdersAction } from '../../redux/actions/orderAction';
 import Loader from '../Loader/Loader';
 
-
 const Orders = () => {
     const { user } = useSelector((state) => state.userState);
     const { orders } = useSelector((state) => state.orderState);

@@ -26,11 +26,16 @@ import OrderSuccess from './components/Payment/OrderSuccess';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Orders from './components/Orders/Orders';
+import OrderDetails from './components/OrderDetails/OrderDetails';
+import Dashboard from './components/Admin/Dashboard/Dashboard';
+import ProductList from './components/Admin/ProductList/ProductList';
+import NewProduct from './components/Admin/NewProduct/NewProduct';
+import UpdateProduct from './components/Admin/UpdateProduct/UpdateProduct';
 
 
 const App = () => {
     const dispatch = useDispatch();
-    const { isAuthenticated } = useSelector((state) => state.userState);
+    const { isAuthenticated, user } = useSelector((state) => state.userState);
     const { isLoading } = useSelector((state) => state.appState);
     const [stripeApiKey, setStripeApiKey] = useState("");
 
@@ -98,6 +103,26 @@ const App = () => {
                     <Route path="/orders" element={
                         <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
                             <Orders />
+                        </ProtectedRoute>} />
+                    <Route path="/order/:id" element={
+                        <ProtectedRoute isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <OrderDetails />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/dashboard" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <Dashboard />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/products" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <ProductList />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/product/new" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <NewProduct />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/product/:id" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <UpdateProduct />
                         </ProtectedRoute>} />
                 </Routes>
                 <Footer />
