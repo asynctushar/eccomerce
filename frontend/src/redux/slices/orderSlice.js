@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     orders: [],
-    order: {}
+    order: {},
+    allOrders: [],
+    deleteOrderStatus: false,
+    updateOrderStatus: false
 }
 
 const orderSlice = createSlice({
@@ -10,14 +13,22 @@ const orderSlice = createSlice({
     initialState,
     reducers: {
         createNewOrder: (state, action) => {
-            // state.orders.push(action.payload);
-            console.log(action.payload)
+            state.orders.push(action.payload);
         },
         getMyOrders: (state, action) => {
             state.orders = action.payload;
         },
         getSingleOrder: (state, action) => {
             state.order = action.payload;
+        },
+        getAllOrders: (state, action) => {
+            state.allOrders = action.payload;
+        },
+        deleteOrderStatus: (state, action) => {
+            state.deleteOrderStatus = action.payload;
+        },
+        updateOrderStatus: (state, action) => {
+            state.updateOrderStatus = action.payload;
         }
     }
 });

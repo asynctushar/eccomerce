@@ -31,6 +31,8 @@ import Dashboard from './components/Admin/Dashboard/Dashboard';
 import ProductList from './components/Admin/ProductList/ProductList';
 import NewProduct from './components/Admin/NewProduct/NewProduct';
 import UpdateProduct from './components/Admin/UpdateProduct/UpdateProduct';
+import OrderList from './components/Admin/OrderList/OrderList';
+import ProcessOrder from './components/Admin/ProcessOrder/ProcessOrder';
 
 
 const App = () => {
@@ -123,6 +125,14 @@ const App = () => {
                     <Route path="/admin/product/:id" element={
                         <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
                             <UpdateProduct />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/orders" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <OrderList />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/order/:id" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <ProcessOrder />
                         </ProtectedRoute>} />
                 </Routes>
                 <Footer />

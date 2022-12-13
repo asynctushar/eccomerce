@@ -86,7 +86,7 @@ export const clearCreateProductStatusAction = () => (dispatch) => {
 }
 
 // Delete Prouduct --admin
-export const DeleteProductAction = (id) => async (dispatch) => {
+export const deleteProductAction = (id) => async (dispatch) => {
     try {
         const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
 
@@ -111,6 +111,8 @@ export const updateProductAction = (productData, id) => async (dispatch) => {
         dispatch(setError(err));
     }
 }
+
+// 
 
 // clear update product status
 export const clearUpdateProductStatusAction = () => (dispatch) => {

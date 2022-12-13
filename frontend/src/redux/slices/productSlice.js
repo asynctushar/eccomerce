@@ -42,6 +42,7 @@ const productSlice = createSlice({
         },
         updateProductStatus: (state, action) => {
             state.updateProductStatus = action.payload;
+            state.product = null;
         }
     }
 

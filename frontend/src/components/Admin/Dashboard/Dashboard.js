@@ -10,16 +10,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAdminAllProductsAction } from '../../../redux/actions/productAction';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import {useAlert} from 'react-alert';
+import { getAllOrdersAction } from '../../../redux/actions/orderAction';
 
 const Dashboard = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const products = useSelector(state => state.productState.adminAllProducts);
+    const allOrders = useSelector((state) => state.orderState.allOrders);
     const { error } = useSelector(state => state.appState);
 
     useEffect(() => {
         dispatch(getAdminAllProductsAction());
-    }, [dispatch]);
+        dispatch(getAllOrdersAction());
+    }, [dispatch, products, allOrders]);
 
     if (error) {
         alert.error(error.response.data.message);
@@ -91,7 +94,7 @@ const Dashboard = () => {
                         </Link>
                         <Link to="/admin/orders">
                             <p>Orders</p>
-                            <p>5</p>
+                            <p>{ allOrders.length}</p>
                         </Link>
                         <Link to="/admin/users">
                             <p>Users</p>

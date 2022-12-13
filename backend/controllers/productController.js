@@ -79,7 +79,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     }
 
     // cloudinary
-    if (req.body.name && req.body.description && String(req.body.price).length <= 7 && String(req.body.stock).length <= 4) {
+    if (req.body.name && req.body.description && String(req.body.price).length <= 7 && String(req.body.stock).length <= 4 && req.body.stock >= 0) {
 
         if (typeof req.body.images === "string") {
             images.push(req.body.images);

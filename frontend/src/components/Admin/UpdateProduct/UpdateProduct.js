@@ -42,7 +42,7 @@ const UpdateProduct = () => {
             dispatch(clearUpdateProductStatusAction());
         }
 
-        if (!product || product && product._id !== id) {
+        if (!product || (product && product._id !== id)) {
             dispatch(getProductDetailsAction(id));
         } else {
             setName(product.name);
@@ -53,8 +53,7 @@ const UpdateProduct = () => {
             setOldImages(product.images)
         }
 
-
-    }, [dispatch, updateProductStatus, product, id])
+    }, [dispatch, updateProductStatus, product, id, alert, navigate])
 
     const updateProductImagesChange = (e) => {
         const files = Array.from(e.target.files);
@@ -79,8 +78,8 @@ const UpdateProduct = () => {
         e.preventDefault();
 
         let imagesCopy = [];
-        
-        
+
+
         if (images.length < 1) {
             imagesCopy = oldImages;
         } else {

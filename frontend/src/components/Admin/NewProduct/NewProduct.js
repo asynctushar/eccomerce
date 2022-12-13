@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useState } from 'react';
 import './NewProduct.css';
+import { Fragment, useEffect, useState } from 'react';
 import MetaData from '../../layout/MetaData';
 import SideBar from '../SideBar/SideBar';
 import { AccountTree, AttachMoney, Description, Image, Spellcheck, Storage } from '@mui/icons-material';

@@ -7,7 +7,7 @@ import { Delete, Edit } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearDeleteProductStatusAction, getAdminAllProductsAction, DeleteProductAction } from '../../../redux/actions/productAction';
+import { clearDeleteProductStatusAction, getAdminAllProductsAction, deleteProductAction } from '../../../redux/actions/productAction';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ const ProductList = () => {
             dispatch(clearDeleteProductStatusAction());
         }
 
-    }, [dispatch, deleteProductStatus]);
+    }, [dispatch, deleteProductStatus, adminAllProducts]);
 
     if (error) {
         alert.error(error.response.data);
@@ -37,7 +37,7 @@ const ProductList = () => {
     }
 
     const deleteProduct = (id) => {
-        dispatch(DeleteProductAction(id));
+        dispatch(deleteProductAction(id));
     }
 
     const columns = [
