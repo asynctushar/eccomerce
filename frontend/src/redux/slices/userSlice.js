@@ -3,7 +3,11 @@ import { createSlice, } from '@reduxjs/toolkit';
 const initialState = {
     user: null,
     isAuthenticated: false,
-    isUpdated: null
+    isUpdated: null,
+    isSingleUserUpdated: false,
+    singleUser: null,
+    allUsers: [],
+    isUserDeleted: false,
 }
 
 const userSlice = createSlice({
@@ -23,7 +27,7 @@ const userSlice = createSlice({
             state.isUpdated = true;
         },
         updatePassword: (state, action) => {
-            
+
             state.user = action.payload.user;
             state.isUpdated = true;
         },
@@ -39,8 +43,26 @@ const userSlice = createSlice({
         resetPassword: (state, action) => {
             state.isUpdated = true;
             state.forgotPasswordMessage = action.payload;
+        },
+        getAllUsers: (state, action) => {
+            state.allUsers = action.payload;
+        },
+        getSingleUser: (state, action) => {
+            state.singleUser = action.payload;
+        },
+        updateSingleUser: (state, action) => {
+            state.isSingleUserUpdated = true;
+            state.singleUser = action.payload.user;
+        },
+        resetUpdateSingleUserStatus: (state, action) => {
+            state.isSingleUserUpdated = action.payload;
+        },
+        deleteUser: (state, action) => {
+            state.isUserDeleted = action.payload
+        },
+        resetDeleteUserStatus: (state, action) => {
+            state.isUserDeleted = action.payload;
         }
-        
     }
 });
 

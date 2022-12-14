@@ -33,6 +33,8 @@ import NewProduct from './components/Admin/NewProduct/NewProduct';
 import UpdateProduct from './components/Admin/UpdateProduct/UpdateProduct';
 import OrderList from './components/Admin/OrderList/OrderList';
 import ProcessOrder from './components/Admin/ProcessOrder/ProcessOrder';
+import UserList from './components/Admin/UserList/UserList';
+import UpdateUserRole from './components/Admin/UpdateUserRole/UpdateUserRole';
 
 
 const App = () => {
@@ -133,6 +135,14 @@ const App = () => {
                     <Route path="/admin/order/:id" element={
                         <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
                             <ProcessOrder />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/users/" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <UserList />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/user/:id" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <UpdateUserRole />
                         </ProtectedRoute>} />
                 </Routes>
                 <Footer />

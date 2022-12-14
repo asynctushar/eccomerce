@@ -2,7 +2,7 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword } = userSlice.actions;
+const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword, getAllUsers, updateSingleUser, resetUpdateSingleUserStatus, deleteUser, getSingleUser, resetDeleteUserStatus } = userSlice.actions;
 const { setLoader, setError } = appSlice.actions;
 
 // Login User
@@ -122,3 +122,59 @@ export const resetPasswordAction = (token, passwords) => async (dispatch) => {
         dispatch(setLoader(false));
     }
 }
+
+// get All users --admin
+export const getAllUsersAction = () => async (dispatch) => {
+    try {
+        const { data } = await axios.get('/api/v1/admin/users');
+
+        dispatch(getAllUsers(data.users))
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// get Single user --admin 
+export const getSingleUserAction = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/api/v1/admin/user/${id}`);
+
+        dispatch(getSingleUser(data.user))
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// updata Single User --admin 
+export const updateSingleUserAction = (userData, id) => async (dispatch) => {
+    try {
+        const { data } =  await axios.put(`/api/v1/admin/user/${id}`, userData, { headers: { "Content-Type": "application/json" } });
+
+        dispatch(updateSingleUser(data))
+    } catch (err) {
+        dispatch(setError(err))
+    }
+}
+
+// reset update user status -- admin 
+export const resetUpdateSingleUserStatusAction = () => (dispatch) => {
+    dispatch(resetUpdateSingleUserStatus(false));
+}
+
+// delete user --admin
+export const deleteUserAction = (id) => async (dispatch) => {
+    try {
+        const { data } = await axios.delete(`/api/v1/admin/user/${id}`);
+
+        dispatch(deleteUser(data.success));
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// reset delete user status
+export const resetDeleteUserStatusAction = () => (dispatch) => {
+    dispatch(resetDeleteUserStatus(false))
+}
+
+

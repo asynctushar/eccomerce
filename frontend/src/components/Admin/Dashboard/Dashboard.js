@@ -9,20 +9,24 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminAllProductsAction } from '../../../redux/actions/productAction';
 import { clearErrorAction } from '../../../redux/actions/appAction';
-import {useAlert} from 'react-alert';
+import { useAlert } from 'react-alert';
 import { getAllOrdersAction } from '../../../redux/actions/orderAction';
+import { getAllUsersAction } from '../../../redux/actions/userAction';
+import { useSlider } from '@mui/base';
 
 const Dashboard = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const products = useSelector(state => state.productState.adminAllProducts);
+    const users = useSelector((state) => state.userState.allUsers);
     const allOrders = useSelector((state) => state.orderState.allOrders);
     const { error } = useSelector(state => state.appState);
 
     useEffect(() => {
         dispatch(getAdminAllProductsAction());
         dispatch(getAllOrdersAction());
-    }, [dispatch, products, allOrders]);
+        dispatch(getAllUsersAction());
+    }, [dispatch]);
 
     if (error) {
         alert.error(error.response.data.message);
@@ -90,20 +94,20 @@ const Dashboard = () => {
                     <div className="dashboard-summary-box-2">
                         <Link to="/admin/products">
                             <p>Products</p>
-                            <p>{ products && products.length}</p>
+                            <p>{products && products.length}</p>
                         </Link>
                         <Link to="/admin/orders">
                             <p>Orders</p>
-                            <p>{ allOrders.length}</p>
+                            <p>{allOrders.length}</p>
                         </Link>
                         <Link to="/admin/users">
                             <p>Users</p>
-                            <p>3</p>
+                            <p>{users && users.length}</p>
                         </Link>
                     </div>
                 </div>
                 <div className="line-chart">
-                    <Line data={lineState} options={options}/>
+                    <Line data={lineState} options={options} />
                 </div>
                 <div className="doughnut-chart">
                     <Doughnut data={doughnutState} />

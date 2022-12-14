@@ -49,26 +49,26 @@ const OrderList = () => {
             flex: 0.5,
             cellClassName: (params) => {
                 return params.row.status === "Delivered"
-                    ? "greenColor"
-                    : "redColor";
+                    ? "green-color"
+                    : "red-color";
             }
         },
         {
-          field: "itemsQty",
-          headerName: "Items Qty",
-          type: "number",
-          minWidth: 150,
-          flex: 0.4,
+            field: "itemsQty",
+            headerName: "Items Qty",
+            type: "number",
+            minWidth: 150,
+            flex: 0.4,
         },
-    
+
         {
-          field: "amount",
-          headerName: "Amount",
-          type: "number",
-          minWidth: 270,
-          flex: 0.5,
+            field: "amount",
+            headerName: "Amount",
+            type: "number",
+            minWidth: 270,
+            flex: 0.5,
         },
-    
+
         {
             field: "actions",
             flex: 0.3,
@@ -90,7 +90,6 @@ const OrderList = () => {
             }
         }
     ];
-    
 
     const rows = []
 
@@ -102,7 +101,6 @@ const OrderList = () => {
             amount: item.totalPrice,
         })
     })
-
 
     return (
         <Fragment>
