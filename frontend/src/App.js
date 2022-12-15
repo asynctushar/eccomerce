@@ -35,6 +35,7 @@ import OrderList from './components/Admin/OrderList/OrderList';
 import ProcessOrder from './components/Admin/ProcessOrder/ProcessOrder';
 import UserList from './components/Admin/UserList/UserList';
 import UpdateUserRole from './components/Admin/UpdateUserRole/UpdateUserRole';
+import ReviewList from './components/Admin/ReviewList/ReviewList';
 
 
 const App = () => {
@@ -57,7 +58,10 @@ const App = () => {
 
         dispatch(loadUserAction());
         getStripeApiKey();
-    }, []);
+    }, [dispatch]);
+
+    // disable inspect element in the client side
+    window.addEventListener('contextmenu', (e) => e.preventDefault());
 
     return (
         <Router>
@@ -143,6 +147,10 @@ const App = () => {
                     <Route path="/admin/user/:id" element={
                         <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
                             <UpdateUserRole />
+                        </ProtectedRoute>} />
+                    <Route path="/admin/reviews" element={
+                        <ProtectedRoute isAdmin={true} user={user} isAuthenticated={isAuthenticated} isLoading={isLoading}>
+                            <ReviewList />
                         </ProtectedRoute>} />
                 </Routes>
                 <Footer />

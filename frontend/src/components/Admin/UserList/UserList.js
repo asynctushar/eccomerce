@@ -1,22 +1,23 @@
 import './UserList.css';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import MetaData from '../../layout/MetaData';
 import SideBar from '../SideBar/SideBar';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUserAction, getAllUsersAction, resetDeleteUserStatusAction } from '../../../redux/actions/userAction';
 import { useAlert } from 'react-alert';
+import { clearErrorAction } from '../../../redux/actions/appAction';
 
 
 const UserList = () => {
-    const { id } = useParams();
     const dispatch = useDispatch();
     const { allUsers, isUserDeleted } = useSelector((state) => state.userState);
     const navigate = useNavigate();
     const alert = useAlert();
+    const { error } = useSelector((state) => state.appState);
 
     useEffect(() => {
         dispatch(getAllUsersAction());
@@ -31,6 +32,11 @@ const UserList = () => {
 
     const deleteUser = (id) => {
         dispatch(deleteUserAction(id));
+    }
+
+    if (error) {
+        alert.error(error.response.data.message);
+        dispatch(clearErrorAction());
     }
 
     const columns = [

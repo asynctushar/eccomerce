@@ -231,6 +231,10 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
 //update user role -- admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+    if(req.params.id === req.user.id) {
+        return next(new ErrorHandler("You can't change your own role.", 403));
+    }
+
     const newUserData = {
         role: req.body.role
     }

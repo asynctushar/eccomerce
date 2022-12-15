@@ -41,7 +41,7 @@ const ProductList = () => {
     }
 
     const columns = [
-        { field: 'id', headerName: "Product Id", minWidth: 200, flex: .5 },
+        { field: 'id', headerName: "Product Id", minWidth: 250, flex: .8 },
         {
             field: 'name',
             headerName: 'Name',
@@ -51,7 +51,7 @@ const ProductList = () => {
         {
             field: 'stock',
             headerName: 'Stock',
-            minWidth: 150,
+            minWidth: 120,
             flex: .3,
             type: "number"
         },

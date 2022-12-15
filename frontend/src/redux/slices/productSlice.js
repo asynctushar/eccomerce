@@ -9,7 +9,9 @@ const initialState = {
     newReviewed: false,
     createProductSuccess: false,
     deleteProductStatus: false,
-    updateProductStatus: false
+    updateProductStatus: false,
+    productReviews: [],
+    isReviewDeleted: false
 }
 
 const productSlice = createSlice({
@@ -43,6 +45,12 @@ const productSlice = createSlice({
         updateProductStatus: (state, action) => {
             state.updateProductStatus = action.payload;
             state.product = null;
+        },
+        getProductReviews: (state, action) => {
+            state.productReviews = action.payload;
+        },
+        deleteProductReviewStatus: (state, action) => {
+            state.isReviewDeleted = action.payload;
         }
     }
 

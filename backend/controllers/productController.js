@@ -208,7 +208,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-//get product reviews
+//get product reviews  -- Admin
 exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.query.id);
     if (!product) {
@@ -221,7 +221,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
     })
 })
 
-//delete product review
+//delete product review -- Admin
 exports.deleteProductReview = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.query.productId);
     if (!product) {

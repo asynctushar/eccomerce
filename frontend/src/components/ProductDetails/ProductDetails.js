@@ -86,9 +86,9 @@ const ProductDetails = () => {
                 <Fragment>
                     <div className="product-details">
                         <div className="images-block">
-                            <Carousel autoPlay infiniteLoop width="40vw" className="image-carousel">
+                            <Carousel autoPlay infiniteLoop  className="image-carousel">
                                 {product.images && product.images.length > 0 && product.images.map((item, i) => (
-                                    <img src={item.url} alt={i} key={i} className="product-image" />
+                                    <img src={item.url} alt={i} key={i} className="product-image"  />
                                 ))}
                             </Carousel>
                         </div>

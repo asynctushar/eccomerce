@@ -2,7 +2,7 @@ import productSlice from "../slices/productSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { getAllProducts, getProductDetails, newReview, clearNewReviewedStatus, getAdminAllProducts, CreateProductStatus, deleteProductStatus, updateProductStatus } = productSlice.actions;
+const { getAllProducts, getProductDetails, newReview, clearNewReviewedStatus, getAdminAllProducts, CreateProductStatus, deleteProductStatus, updateProductStatus, getProductReviews, deleteProductReviewStatus } = productSlice.actions;
 const { setLoader, setError, } = appSlice.actions;
 
 export const getAllProductsAction = (keyword = "", currentPage = 1, priceRange = [0, 1000000], category, ratings) => async (dispatch) => {
@@ -96,7 +96,7 @@ export const deleteProductAction = (id) => async (dispatch) => {
     }
 }
 
-// Clear delete product Status
+// Clear delete product Status --admin
 export const clearDeleteProductStatusAction = () => (dispatch) => {
     dispatch(deleteProductStatus(false));
 }
@@ -114,7 +114,34 @@ export const updateProductAction = (productData, id) => async (dispatch) => {
 
 // 
 
-// clear update product status
+// clear update product status --admin
 export const clearUpdateProductStatusAction = () => (dispatch) => {
     dispatch(updateProductStatus(false));
+}
+
+// get product reviews -- admin
+export const getProductReviewsAction = (productId) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/api/v1/admin/reviews?id=${productId}`);
+
+        dispatch(getProductReviews(data.reviews));
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// Delete product review
+export const deleteProductReviewAction = (productId, reviewId) => async (dispatch) => {
+    try {
+        const { data } = await axios.delete(`/api/v1/admin/reviews?productId=${productId}&&reviewId=${reviewId}`);
+
+        dispatch(deleteProductReviewStatus(data.success));
+    } catch (err) {
+        dispatch(setError(err));
+    }
+}
+
+// clear delete product review status
+export const clearDeleteReviewStatusAction = () => (dispatch) => {
+    dispatch(deleteProductReviewStatus(false));
 }

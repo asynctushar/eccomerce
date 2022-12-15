@@ -2,7 +2,7 @@ import './UpdateUserRole.css';
 import { Fragment, useEffect, useState } from 'react';
 import MetaData from '../../layout/MetaData';
 import SideBar from '../SideBar/SideBar';
-import { SwitchAccount, Email, Description, Spellcheck } from '@mui/icons-material';
+import { SwitchAccount, Email, Spellcheck } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
@@ -18,7 +18,8 @@ const UpdateUserRole = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const { singleUser: user, isSingleUserUpdated } = useSelector((state) => state.userState);
-    
+    const { error } = useSelector((state) => state.appState);
+
 
     useEffect(() => {
         dispatch(getSingleUserAction(id));
@@ -35,7 +36,13 @@ const UpdateUserRole = () => {
     const submitRoleHandler = (e) => {
         e.preventDefault();
 
-        dispatch(updateSingleUserAction({role}, id))
+        dispatch(updateSingleUserAction({ role }, id))
+    }
+
+    if (error) {
+        alert.error(error.response.data.message);
+
+        dispatch(clearErrorAction());
     }
 
 

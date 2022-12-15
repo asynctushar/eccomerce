@@ -1,6 +1,6 @@
+import './Dashboard.css';
 import SideBar from '../SideBar/SideBar';
 import MetaData from '../../layout/MetaData';
-import './Dashboard.css';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Line, Doughnut } from 'react-chartjs-2';
@@ -53,12 +53,15 @@ const Dashboard = () => {
         }
     });
 
+    let totalPrice = 0;
+    allOrders && allOrders.forEach(order => totalPrice += order.totalPrice);
+
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
         datasets: [
             {
                 label: "Total Amount",
-                data: [0, 100000],
+                data: [0, totalPrice ],
                 backgroundColor: "tomato",
                 hoverBackgroundColor: "rgb(197, 72, 49)"
             }
@@ -89,7 +92,7 @@ const Dashboard = () => {
 
                 <div className="dashboard-summary">
                     <div>
-                        <p>Total Amount <br /> 20000 taka</p>
+                        <p>Total Amount <br /> {totalPrice} taka</p>
                     </div>
                     <div className="dashboard-summary-box-2">
                         <Link to="/admin/products">

@@ -10,6 +10,10 @@ html {
     list-style: none;
 }
 
+body {
+    cursor: url('./images/cursor.png'), auto;
+}
+
 a {
     color: inherit;
 }

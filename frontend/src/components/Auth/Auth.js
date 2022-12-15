@@ -121,11 +121,11 @@ const LogIn = () => {
                             <form className="login-form active" ref={loginRef} onSubmit={loginHandler}>
                                 <div className="loginEmail">
                                     <MailOutlineIcon />
-                                    <input type="email" name="email" placeholder="Email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                    <input type="email" name="email" placeholder="Email" autoComplete="on" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
                                 </div>
                                 <div className="loginPassword">
                                     <LockOpenIcon />
-                                    <input type="password" name="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                    <input type="password" name="password" placeholder="Password" required autoComplete="on" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                                 </div>
                                 <NavLink to="/password/forgot" className="forget-password" >Forget Password?</NavLink>
                                 <button className="login-button">
@@ -137,19 +137,19 @@ const LogIn = () => {
                             <form className="register-form" ref={registerRef} onSubmit={registerHandler}>
                                 <div className="regName">
                                     <PermIdentityIcon />
-                                    <input type="text" name="name" placeholder="Name" value={name} required onChange={registerFormChange} />
+                                    <input type="text" name="name" placeholder="Name" value={name} required autoComplete="off" onChange={registerFormChange} />
                                 </div>
                                 <div className="regEmail">
                                     <MailOutlineIcon />
-                                    <input type="email" name="email" placeholder="Email" value={email} required onChange={registerFormChange} />
+                                    <input type="email" name="email" placeholder="Email" value={email} required autoComplete="off" onChange={registerFormChange} />
                                 </div>
                                 <div className="regPassword">
                                     <LockOpenIcon />
-                                    <input type="password" name="password" placeholder="Password" value={password} required onChange={registerFormChange} />
+                                    <input type="password" name="password" placeholder="Password" value={password} required autoComplete="off" onChange={registerFormChange} />
                                 </div>
                                 <div className="regConfirmPassword">
                                     <LockOpenIcon />
-                                    <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required onChange={registerFormChange} />
+                                    <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required  autoComplete="off" onChange={registerFormChange} />
                                 </div>
                                 <div className="regFileUpload">
                                     <img src={avatarPrev} alt="Avatar" />

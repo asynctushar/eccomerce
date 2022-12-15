@@ -10,6 +10,6 @@ router.route('/admin/products').get(isAuthenticatedUser, authorizedRole('admin')
 router.route('/admin/product/:id').put(isAuthenticatedUser, authorizedRole('admin'), updateProduct).delete(isAuthenticatedUser, authorizedRole('admin'), deleteProduct);
 router.route('/product/:id').get(getProductDetails);
 router.route('/review').put(isAuthenticatedUser, createProductReview);
-router.route('/reviews').get(getProductReviews).delete(isAuthenticatedUser, deleteProductReview);
+router.route('/admin/reviews').get(isAuthenticatedUser, authorizedRole('admin'), getProductReviews).delete(isAuthenticatedUser, authorizedRole('admin'), deleteProductReview);
 
 module.exports = router;
