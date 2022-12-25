@@ -31,7 +31,7 @@ const UpdateUserRole = () => {
             dispatch(resetUpdateSingleUserStatusAction());
         }
 
-    }, [dispatch, id, isSingleUserUpdated]);
+    }, [dispatch, id, isSingleUserUpdated]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const submitRoleHandler = (e) => {
         e.preventDefault();

@@ -87,7 +87,6 @@ const Orders = () => {
         dispatch(getMyOrdersAction());
     }, [dispatch])
 
-
     return (
         <Fragment >
             {isLoading ? <Loader /> :

@@ -1,9 +1,10 @@
 import './Search.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import MetaData from '../layout/MetaData';
 
-const Search = ({ history }) => {
+const Search = () => {
     const navigate = useNavigate();
 
     const searchHandlar = (e) => {
@@ -15,6 +16,7 @@ const Search = ({ history }) => {
 
     return (
         <Fragment >
+            <MetaData title="Search Product" />
             <form className="search" onSubmit={searchHandlar}>
                 <div className="search-container">
                     <input type="text" placeholder="Find Amazing Products" />

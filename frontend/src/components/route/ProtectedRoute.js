@@ -1,7 +1,11 @@
 import { Fragment } from "react";
-import { Navigate } from "react-router";
+import { Navigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
-const ProtectedRoute = ({ isAdmin, user, isAuthenticated, isLoading, children }) => {
+const ProtectedRoute = ({ isAdmin, children }) => {
+    const isLoading = useSelector(state => state.appState.isLoading);
+    const { isAuthenticated, user } = useSelector(state => state.userState);
+
     return (
         <Fragment>
             {!isAdmin && !isLoading && isAuthenticated && children}

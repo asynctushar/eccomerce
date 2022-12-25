@@ -28,7 +28,7 @@ const OrderList = () => {
             dispatch(clearDeleteOrderStatusAction());
         }
 
-    }, [dispatch, deleteOrderStatus, allOrders]);
+    }, [dispatch, deleteOrderStatus, allOrders]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
         alert.error(error.response.data);

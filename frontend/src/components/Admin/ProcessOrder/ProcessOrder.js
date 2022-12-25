@@ -25,7 +25,7 @@ const ProcessOrder = () => {
         }
 
         dispatch(getSingleOrderAction(id));
-    }, [dispatch, id, updateOrderStatus]);
+    }, [dispatch, id, updateOrderStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
         alert.error(error.response.data.message);

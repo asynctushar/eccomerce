@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useAlert } from 'react-alert';
 import Pagination from 'react-js-pagination';
 import { Slider, Typography, Rating } from '@mui/material';
+import MetaData from '../layout/MetaData';
 
 const categoryList = ['All', 'Laptop', 'PC', 'Mobile', 'Accessories', 'Games', 'Others'];
 
@@ -30,7 +31,7 @@ const Products = () => {
     }, [dispatch, keyword, alert, currentPage, priceRange, category, rating]);
 
     if (error) {
-        alert.show(error.message);
+        alert.error(error.response.data.message);
         dispatch(clearErrorAction());
     }
 
@@ -45,6 +46,7 @@ const Products = () => {
 
     return (
         <Fragment>
+            <MetaData title="Products" />
             <h2 className="products-heading">Products</h2>
 
             {isLoading ? <Loader /> :

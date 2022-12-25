@@ -5,14 +5,13 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Legend, Tooltip, ArcElement } from 'chart.js';
-import { useEffect } from 'react';
+import {  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminAllProductsAction } from '../../../redux/actions/productAction';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import { useAlert } from 'react-alert';
 import { getAllOrdersAction } from '../../../redux/actions/orderAction';
 import { getAllUsersAction } from '../../../redux/actions/userAction';
-import { useSlider } from '@mui/base';
 
 const Dashboard = () => {
     const alert = useAlert();
@@ -26,7 +25,8 @@ const Dashboard = () => {
         dispatch(getAdminAllProductsAction());
         dispatch(getAllOrdersAction());
         dispatch(getAllUsersAction());
-    }, [dispatch]);
+    }, [dispatch]); 
+
 
     if (error) {
         alert.error(error.response.data.message);
@@ -61,7 +61,7 @@ const Dashboard = () => {
         datasets: [
             {
                 label: "Total Amount",
-                data: [0, totalPrice ],
+                data: [0, totalPrice],
                 backgroundColor: "tomato",
                 hoverBackgroundColor: "rgb(197, 72, 49)"
             }

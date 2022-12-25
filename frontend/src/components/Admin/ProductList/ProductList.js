@@ -28,7 +28,7 @@ const ProductList = () => {
             dispatch(clearDeleteProductStatusAction());
         }
 
-    }, [dispatch, deleteProductStatus, adminAllProducts]);
+    }, [dispatch, deleteProductStatus, adminAllProducts]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
         alert.error(error.response.data);

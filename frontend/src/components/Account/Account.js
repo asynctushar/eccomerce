@@ -13,7 +13,7 @@ const Account = () => {
   
     useEffect(() => {
         dispatch(resetUpdateStatusAction());
-    }, [])
+    }, [dispatch])
 
     return (
         <Fragment>

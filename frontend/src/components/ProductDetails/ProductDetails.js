@@ -11,6 +11,8 @@ import { clearErrorAction } from '../../redux/actions/appAction';
 import { useAlert } from 'react-alert';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Rating } from '@mui/material';
 import { addCartItemAction } from '../../redux/actions/cartAction';
+import NotFound from '../layout/NotFound/NotFound';
+import MetaData from '../layout/MetaData';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -80,15 +82,20 @@ const ProductDetails = () => {
         precision: 0.5,
     };
 
+    if (id.length !== 24 || !product) {
+        return <NotFound />
+    }
+
     return (
         <Fragment >
+            <MetaData title="Product Details" />
             {isLoading ? <Loader /> : (
                 <Fragment>
                     <div className="product-details">
                         <div className="images-block">
-                            <Carousel autoPlay infiniteLoop  className="image-carousel">
+                            <Carousel autoPlay infiniteLoop className="image-carousel">
                                 {product.images && product.images.length > 0 && product.images.map((item, i) => (
-                                    <img src={item.url} alt={i} key={i} className="product-image"  />
+                                    <img src={item.url} alt={i} key={i} className="product-image" />
                                 ))}
                             </Carousel>
                         </div>

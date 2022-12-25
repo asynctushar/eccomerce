@@ -41,10 +41,10 @@ const UpdateAccount = () => {
         if (isUpdated) {
             navigate('/account');
         }
-    }, [dispatch, isUpdated, error]);
+    }, [dispatch, isUpdated, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
-        alert.show(error.message);
+        alert.error(error.response.data.message);
         dispatch(clearErrorAction());
     }
 

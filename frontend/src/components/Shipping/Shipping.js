@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react';
 import './Shipping.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
 import { saveShippingInfoAction } from '../../redux/actions/cartAction';
 import { PinDrop, Home, LocationCity, Public, Phone, TransferWithinAStation } from '@mui/icons-material';
 import MetaData from '../layout/MetaData';
@@ -10,7 +9,6 @@ import CheckoutSteps from './CheckoutSteps/CheckoutSteps';
 import { useNavigate } from "react-router-dom";
 
 const Shipping = () => {
-    const alert = useAlert();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { shippingInfo } = useSelector(state => state.cartState);

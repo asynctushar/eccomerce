@@ -28,7 +28,7 @@ const UserList = () => {
             dispatch(resetDeleteUserStatusAction());
         }
 
-    }, [dispatch, isUserDeleted])
+    }, [dispatch, isUserDeleted]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const deleteUser = (id) => {
         dispatch(deleteUserAction(id));

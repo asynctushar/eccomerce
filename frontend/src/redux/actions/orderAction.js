@@ -29,8 +29,9 @@ export const getMyOrdersAction = () => async (dispatch) => {
     try {
         const { data } = await axios.get('/api/v1/me/orders');
         dispatch(getMyOrders(data.orders));
-        
+        dispatch(setLoader(false))
     } catch (err) {
+        dispatch(setLoader(false));
         dispatch(setError(err));
     }
 }

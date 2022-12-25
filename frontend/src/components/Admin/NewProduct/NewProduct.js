@@ -39,7 +39,7 @@ const NewProduct = () => {
             navigate('/admin/dashboard');
             dispatch(clearCreateProductStatusAction());
         }
-    }, [dispatch, createProductSuccess])
+    }, [dispatch, createProductSuccess]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const createProductImagesChange = (e) => {
         const files = Array.from(e.target.files);
@@ -114,7 +114,7 @@ const NewProduct = () => {
                         </div>
                         <div className="newproduct-form-image">
                             {imagesPreview.map((item, index) => (
-                                <img src={item} alt={`Image-${index + 1}`} key={index} />
+                                <img src={item} alt={`Img-${index + 1}`} key={index} />
                             ))}
                         </div>
                         <Button className="newproduct-btn" type="submit"> Create Product</Button>

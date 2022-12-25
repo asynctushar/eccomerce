@@ -23,11 +23,11 @@ const ResetPassword = () => {
         e.preventDefault();
 
         if (password.length < 8 && confirmPassword.length < 8) {
-            return alert.show('Password length should be minimum 8 characters');
+            return alert.error('Password length should be minimum 8 characters');
         }
 
         if (password !== confirmPassword) {
-            return alert.show("New password doesn't match with confirm password");
+            return alert.error("New password doesn't match with confirm password");
         }
 
         dispatch(resetPasswordAction(token, { password, confirmPassword }))
@@ -38,10 +38,10 @@ const ResetPassword = () => {
             alert.success(forgotPasswordMessage.message);
             navigate('/login');
         }
-    }, [dispatch, isUpdated, forgotPasswordMessage]);
+    }, [dispatch, isUpdated, forgotPasswordMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
-        alert.show(error.response.data.message);
+        alert.error(error.response.data.message);
         dispatch(clearErrorAction());
     }
 

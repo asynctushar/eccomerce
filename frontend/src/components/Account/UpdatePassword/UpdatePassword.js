@@ -37,10 +37,10 @@ const UpdatePassword = () => {
         if (isUpdated) {
             navigate('/account');
         }
-    }, [dispatch, isUpdated, error]);
+    }, [dispatch, isUpdated, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
-        alert.show(error.response.data.message);
+        alert.error(error.response.data.message);
         dispatch(clearErrorAction());
     }
 

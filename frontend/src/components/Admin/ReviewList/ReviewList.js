@@ -25,7 +25,7 @@ const ReviewList = () => {
             dispatch(clearDeleteReviewStatusAction());
         }
 
-    }, [dispatch, isReviewDeleted, productId, reviews]);
+    }, [dispatch, isReviewDeleted, productId, reviews]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
         alert.error(error.response.data.message);

@@ -42,10 +42,10 @@ const LogIn = () => {
         }
 
         dispatch(resetForgotPasswordStatusAction());
-    }, [dispatch, isAuthenticated]);
+    }, [dispatch, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
-        alert.show(error.response.data.message);
+        alert.error(error.response.data.message);
         dispatch(clearErrorAction());
     }
 
@@ -58,7 +58,7 @@ const LogIn = () => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            return alert.show('password does not match')
+            return alert.error('password does not match')
         }
 
         const userInfo = {

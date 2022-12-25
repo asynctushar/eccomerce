@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { useAlert } from 'react-alert';
 import CheckoutSteps from '../Shipping/CheckoutSteps/CheckoutSteps';
 import { useSelector, useDispatch } from 'react-redux';
-import { Fragment, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import MetaData from '../layout/MetaData';
 import { CardNumberElement, CardCvcElement, CardExpiryElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { CreditCard, VpnKey, Event } from '@mui/icons-material';
@@ -22,17 +22,23 @@ const Payment = () => {
     const elements = useElements();
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
+    useEffect(() => {
+        if (!orderInfo) {
+            navigate('/cart')
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
     const paymentData = {
-        amount: Math.round(orderInfo.totalPrice * 100)
+        amount: Math.round(orderInfo && orderInfo.totalPrice * 100)
     }
 
     const order = {
         shippingInfo,
         orderItems: cartItems,
-        itemsPrice: orderInfo.subTotal,
-        taxPrice: orderInfo.tax,
-        shippingPrice: orderInfo.shippingCharge,
-        totalPrice: orderInfo.totalPrice,
+        itemsPrice: orderInfo && orderInfo.subTotal,
+        taxPrice: orderInfo && orderInfo.tax,
+        shippingPrice: orderInfo && orderInfo.shippingCharge,
+        totalPrice: orderInfo && orderInfo.totalPrice,
     };
 
 

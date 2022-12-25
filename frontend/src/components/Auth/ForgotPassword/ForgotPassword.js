@@ -20,7 +20,7 @@ const ForgotPassword = () => {
             dispatch(resetForgotPasswordStatusAction());
             setEmail('');
         }
-    }, [dispatch, forgotPasswordMessage]);
+    }, [dispatch, forgotPasswordMessage]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (error) {
         alert.error(error.response.data.message);

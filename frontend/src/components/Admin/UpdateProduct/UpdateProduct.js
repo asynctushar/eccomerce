@@ -53,7 +53,7 @@ const UpdateProduct = () => {
             setOldImages(product.images)
         }
 
-    }, [dispatch, updateProductStatus, product, id, alert, navigate])
+    }, [dispatch, updateProductStatus, product, id, alert, navigate]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const updateProductImagesChange = (e) => {
         const files = Array.from(e.target.files);
@@ -101,7 +101,7 @@ const UpdateProduct = () => {
 
     return (
         <Fragment>
-            <MetaData title="Create New Product" />
+            <MetaData title="Update Product" />
             <div className="dashboard">
                 <SideBar />
                 <div className="updateproduct-container">
@@ -139,12 +139,12 @@ const UpdateProduct = () => {
                         </div>
                         <div className="updateproduct-form-image">
                             {oldImages && oldImages.map((item, index) => (
-                                <img src={item.url} alt={`Image-${index + 1}`} key={index} />
+                                <img src={item.url} alt={`Img-${index + 1}`} key={index} />
                             ))}
                         </div>
                         <div className="updateproduct-form-image">
                             {imagesPreview && imagesPreview.map((item, index) => (
-                                <img src={item} alt={`Image-${index + 1}`} key={index} />
+                                <img src={item} alt={`Img-${index + 1}`} key={index} />
                             ))}
                         </div>
                         <Button className="updateproduct-btn" type="submit"> Update Product</Button>

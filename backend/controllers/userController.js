@@ -59,7 +59,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 //Logout a user
 exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
 
-
     res.cookie("token", null, {
         expires: new Date(Date.now()),
         httpOnly: true
@@ -81,7 +80,13 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    
+    let resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+
+    if (process.env.NODE_ENV !== "PRODUCTION") {
+    resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    }
+    
     const message = `Your password reset url is: \n\n ${resetPasswordUrl} \n\n If you have not requested this then please ignore it.`;
 
     try {
