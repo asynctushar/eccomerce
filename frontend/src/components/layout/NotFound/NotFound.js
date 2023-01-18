@@ -1,12 +1,12 @@
 import './NotFound.css';
-import { CheckCircle } from '@mui/icons-material';
+import { NotAccessible } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const OrderSuccess = () => {
     return (
         <div className="not-found">
-            <CheckCircle />
+            <NotAccessible />
 
             <Typography> Page Not Found</Typography>
             <Link to="/">Return Home</Link>

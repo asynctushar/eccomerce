@@ -6,7 +6,11 @@
 }
 
 .cart-item-card img {
-    width: 5vmax;
+    width: 4vmax;
+}
+
+.cart-item-card img[alt] {
+    font-size: .7rem;
 }
 
 .cart-item-card > div {

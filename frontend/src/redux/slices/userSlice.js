@@ -8,12 +8,16 @@ const initialState = {
     singleUser: null,
     allUsers: [],
     isUserDeleted: false,
+    isLoading: true
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        setUserLoader: (state, action) => {
+            state.isLoading = action.payload;
+        },
         login: (state, action) => {
             state.user = action.payload.user;
             state.isAuthenticated = action.payload.success;

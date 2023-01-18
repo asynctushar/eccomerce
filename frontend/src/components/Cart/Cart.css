@@ -32,6 +32,7 @@
 
 .cart {
     padding: 2vmax 5vmax;
+    margin-bottom: auto;
 }
 
 .cart-header {
@@ -162,11 +163,11 @@
     }
     
     .cart-container .cart-input button {
-        padding: 1.5vmax;
+        padding: .5rem;
     }
 
     .cart-container .cart-input input {
-        padding: 1.5vmax;
+        padding: .4rem;
         font: 400 1.8vmax "Roboto";
     }
     

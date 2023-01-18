@@ -110,7 +110,7 @@
     }
 
     .newproduct-container h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .newproduct-form {
@@ -143,8 +143,7 @@
 
 
     .newproduct-btn {
-        font: 300 1.9vmax "Roboto";
-        padding: 1.8vmax;
+        font-size: .8rem!important;
     }
 }
 

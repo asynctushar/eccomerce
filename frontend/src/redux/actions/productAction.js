@@ -2,7 +2,7 @@ import productSlice from "../slices/productSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { getAllProducts, getProductDetails, newReview, clearNewReviewedStatus, getAdminAllProducts, CreateProductStatus, deleteProductStatus, updateProductStatus, getProductReviews, deleteProductReviewStatus } = productSlice.actions;
+const { getAllProducts, getProductDetails, newReview, clearNewReviewedStatus, getAdminAllProducts, CreateProductStatus, deleteProductStatus, updateProductStatus, getProductReviews, deleteProductReviewStatus, setProductLoader } = productSlice.actions;
 const { setLoader, setError, } = appSlice.actions;
 
 export const getAllProductsAction = (keyword = "", currentPage = 1, priceRange = [0, 1000000], category, ratings) => async (dispatch) => {
@@ -31,13 +31,13 @@ export const getAllProductsAction = (keyword = "", currentPage = 1, priceRange =
 
 export const getProductDetailsAction = (id) => async (dispatch) => {
     try {
-        dispatch(setLoader(true));
+        dispatch(setProductLoader(true));
         const { data } = await axios.get(`/api/v1/product/${id}`);
         dispatch(getProductDetails(data.product));
-        dispatch(setLoader(false))
+        dispatch(setProductLoader(false))
     } catch (err) {
         dispatch(setError(err));
-        dispatch(setLoader());
+        dispatch(setProductLoader(false));
     }
 }
 

@@ -60,7 +60,7 @@ const App = () => {
     }, [dispatch]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // disable inspect element in the client side
-    window.addEventListener('contextmenu', (e) => e.preventDefault());
+    // window.addEventListener('contextmenu', (e) => e.preventDefault());
 
     return (
         <Router>

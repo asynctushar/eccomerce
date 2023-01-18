@@ -3,7 +3,7 @@ import { createSlice, } from '@reduxjs/toolkit';
 const initialState = {
     products: [],
     productCount: 0,
-    product: {},
+    product: undefined,
     productPerPage: 5,
     filteredProductCount: 0,
     newReviewed: false,
@@ -11,13 +11,17 @@ const initialState = {
     deleteProductStatus: false,
     updateProductStatus: false,
     productReviews: [],
-    isReviewDeleted: false
+    isReviewDeleted: false,
+    isLoading: true
 }
 
 const productSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
+        setProductLoader: (state, action) => {
+            state.isLoading = action.payload;
+        },
         getAllProducts: (state, action) => {
             state.products = action.payload.products;
             state.productCount = action.payload.productCount;

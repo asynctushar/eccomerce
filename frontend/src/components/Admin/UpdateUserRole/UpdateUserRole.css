@@ -9,7 +9,7 @@
 
 .updateuser-container h1 {
     color:rgba(0, 0, 0, .735);
-    font: 300 2rem 'Roboto';
+    font: 300 1.5rem 'Roboto';
     text-align: center;
 }
 
@@ -76,7 +76,7 @@
     }
 
     .updateuser-container h1 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .updateuser-form {

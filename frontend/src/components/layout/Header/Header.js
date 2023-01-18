@@ -48,9 +48,9 @@ const Header = () => {
 
     return (
         <AppBar position="static" className="header">
-            <Container maxWidth="xl"  >
+            <Container maxWidth="xl">
                 <Toolbar disableGutters >
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }  }}>
                         <NavLink to="/" >
                             <img src={logo} alt="logo" className="site-logo" />
                         </NavLink>
@@ -95,7 +95,9 @@ const Header = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{
+                        display: { xs: 'flex', md: 'none' }, width: {
+                            xs: "100px", sm: "100%"} }}>
                         <NavLink to="/" >
                             <img src={logo} alt="logo" className="site-logo" />
                         </NavLink>
@@ -116,7 +118,7 @@ const Header = () => {
                             </Button>
                         ))}
                     </Box>
-                    <Box sx={{ ml: "2rem", fontSize: "1.5rem", color: 'inherit' }}>
+                    <Box sx={{ ml: "2rem", fontSize: { 'xs': '1.2rem', 'sm': "1.5rem" }, color: 'inherit' }}>
                         <Tooltip title="Search">
                             <NavLink to="/search" style={({ isActive }) => ({
                                 color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
@@ -127,7 +129,7 @@ const Header = () => {
                         </Tooltip>
                     </Box>
                     <Box sx={{
-                        ml: "1rem", fontSize: '2rem', color: 'inherit'
+                        ml: "1rem", fontSize: { 'xs': '1.3rem', 'sm': "2rem" }, color: 'inherit'
                     }}>
                         <Tooltip title={cartItems.length > 0 ? `Cart(${cartItems.length})` : "Cart"} >
                             <NavLink to='/cart' style={({ isActive }) => ({
@@ -139,13 +141,13 @@ const Header = () => {
                         </Tooltip>
                     </Box>
                     {!isAuthenticated &&
-                        <Box sx={{ ml: "1rem", fontSize: '2rem', color: 'inherit' }}>
+                        <Box sx={{ ml: "1rem", fontSize: "2rem", color: 'inherit' }}>
                             <Tooltip title={isAuthenticated ? "" : "Login"}>
                                 <NavLink to="/login" style={({ isActive }) => ({
                                     color: isActive ? '#fff' : 'rgba(255, 255, 255, 0.674)',
                                     cursor: isActive ? "unset" : "pointer"
                                 })}>
-                                    <AccountCircleIcon sx={{ fontSize: '2rem' }} />
+                                    <AccountCircleIcon sx={{fontSize: {'xs': '1.6rem', 'sm': "2rem"}}} />
                                 </NavLink>
                             </Tooltip>
                         </Box>

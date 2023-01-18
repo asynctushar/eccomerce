@@ -49,4 +49,8 @@
     .orderlist-table div {
         font: 300 4vw 'Roboto';
     }
+
+.orderlist-heading {
+    font-size: 1.3rem;
+}
 }

@@ -17,8 +17,7 @@ import MetaData from '../layout/MetaData';
 const ProductDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { product, newReviewed } = useSelector((state) => state.productState);
-    const isLoading = useSelector((state) => state.appState.isLoading);
+    const { product, newReviewed, isLoading } = useSelector((state) => state.productState);
     const error = useSelector((state) => state.appState.error);
     const alert = useAlert();
 
@@ -77,99 +76,99 @@ const ProductDetails = () => {
 
     const options = {
         size: "large",
-        value: product.ratings,
+        value: product?.ratings,
         readOnly: true,
         precision: 0.5,
     };
 
-    if (id.length !== 24 || !product) {
-        return <NotFound />
-    }
-
     return (
         <Fragment >
-            <MetaData title="Product Details" />
             {isLoading ? <Loader /> : (
                 <Fragment>
-                    <div className="product-details">
-                        <div className="images-block">
-                            <Carousel autoPlay infiniteLoop className="image-carousel">
-                                {product.images && product.images.length > 0 && product.images.map((item, i) => (
-                                    <img src={item.url} alt={i} key={i} className="product-image" />
-                                ))}
-                            </Carousel>
-                        </div>
-                        <div>
-                            <div className="details-block-1">
-                                <h2>{product.name}</h2>
-                                <p>Product #{product._id}</p>
-                            </div>
-                            <div className="details-block-2">
-                                <Rating {...options} />
-                                <span>({product.noOfReviews} Reviews)</span>
-                            </div>
-                            <div className="details-block-3">
-                                <h1>{`${product.price} taka`}</h1>
-                                <div className="details-block-3-1">
-                                    <div className="details-block-3-1-1">
-                                        <button onClick={decreaseQuantity}>-</button>
-                                        <input type="number" readOnly value={quantity} />
-                                        <button onClick={increaseQuantity}>+</button>
-                                    </div>
-                                    <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
+                    {!product ? <NotFound /> : (
+                        <Fragment>
+                            <MetaData title="Product Details" />
+                            <div className="product-details">
+                                <div className="images-block">
+                                    <Carousel autoPlay infiniteLoop className="image-carousel">
+                                        {product.images && product.images.length > 0 && product.images.map((item, i) => (
+                                            <img src={item.url} alt={i} key={i} className="product-image" />
+                                        ))}
+                                    </Carousel>
                                 </div>
+                                <div>
+                                    <div className="details-block-1">
+                                        <h2>{product.name}</h2>
+                                        <p>Product #{product._id}</p>
+                                    </div>
+                                    <div className="details-block-2">
+                                        <Rating {...options} />
+                                        <span>({product.noOfReviews} Reviews)</span>
+                                    </div>
+                                    <div className="details-block-3">
+                                        <h1>{`${product.price} taka`}</h1>
+                                        <div className="details-block-3-1">
+                                            <div className="details-block-3-1-1">
+                                                <button onClick={decreaseQuantity}>-</button>
+                                                <input type="number" readOnly value={quantity} />
+                                                <button onClick={increaseQuantity}>+</button>
+                                            </div>
+                                            <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandler}>Add to Cart</button>
+                                        </div>
 
-                                <p className={product.stock < 1 ? "red-color" : "green-color"}>
-                                    {product.stock < 1 ? "OutOfStock" : "InStock"}
-                                </p>
+                                        <p className={product.stock < 1 ? "red-color" : "green-color"}>
+                                            {product.stock < 1 ? "OutOfStock" : "InStock"}
+                                        </p>
+                                    </div>
+                                    <div className="details-block-4">
+                                        Description: <p>{product.description}</p>
+                                    </div>
+                                    <button onClick={submitReviewToggle} className="submit-review">Submit Review</button>
+                                </div>
                             </div>
-                            <div className="details-block-4">
-                                Description: <p>{product.description}</p>
-                            </div>
-                            <button onClick={submitReviewToggle} className="submit-review">Submit Review</button>
-                        </div>
-                    </div>
 
-                    <h3 className="reviews-heading"> Reviews </h3>
+                            <h3 className="reviews-heading"> Reviews </h3>
 
-                    <Dialog
-                        aria-labelledby="simple-dialog-title"
-                        open={open}
-                        onClose={submitReviewToggle}
-                    >
-                        <DialogTitle>Submit Review</DialogTitle>
-                        <DialogContent className="submit-dialog">
-                            <Rating
-                                onChange={(e) => setRating(Number(e.target.value))}
-                                value={rating}
-                                size="large"
-                            />
+                            <Dialog
+                                aria-labelledby="simple-dialog-title"
+                                open={open}
+                                onClose={submitReviewToggle}
+                            >
+                                <DialogTitle>Submit Review</DialogTitle>
+                                <DialogContent className="submit-dialog">
+                                    <Rating
+                                        onChange={(e) => setRating(Number(e.target.value))}
+                                        value={rating}
+                                        size="large"
+                                    />
 
-                            <textarea
-                                className="submit-dialog-textArea"
-                                cols="30"
-                                rows="5"
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            ></textarea>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={submitReviewToggle} color="secondary">
-                                Cancel
-                            </Button>
-                            <Button onClick={reviewSubmitHandler} color="primary">
-                                Submit
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                                    <textarea
+                                        className="submit-dialog-textArea"
+                                        cols="30"
+                                        rows="5"
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                    ></textarea>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={submitReviewToggle} color="secondary">
+                                        Cancel
+                                    </Button>
+                                    <Button onClick={reviewSubmitHandler} color="primary">
+                                        Submit
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
 
 
-                    {product.reviews && product.reviews[0] ? (
-                        <div className="reviews">
-                            {product.reviews.map((review, i) => <ReviewCard key={i} review={review} />)}
-                        </div>
-                    ) : (
-                        <p className="no-reviews">No Reviews Yet</p>
+                            {product.reviews && product.reviews[0] ? (
+                                <div className="reviews">
+                                    {product.reviews.map((review, i) => <ReviewCard key={i} review={review} />)}
+                                </div>
+                            ) : (
+                                <p className="no-reviews">No Reviews Yet</p>
+                            )}
+                        </Fragment>
                     )}
                 </Fragment>
             )}

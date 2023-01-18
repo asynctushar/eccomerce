@@ -1,6 +1,6 @@
 .banner {
     background-image: linear-gradient(to right, #635dc0, #3027ae);
-    height: 100vmin;
+    height: 96vmin;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -94,6 +94,10 @@
     object-fit: cover;
 }
 
+.productCard img[alt] {
+    font-size: 1rem;
+}
+
 .productCard div {
     margin: .2vmax;
     display: flex;
@@ -130,10 +134,10 @@
         font-size: 1.7vmax;
     }
 
-    .productCard>div {
+    /* .productCard>div {
         margin: 0;
         display: block;
-    }
+    } */
 
     .productCard > span {
         font-size: 1.5vmax;
@@ -142,5 +146,9 @@
     .productCard > div > span {
         margin: 0 0.5vmax;
         font: 300 1vmax 'Roboto';
+    }
+
+    .productCard img[alt] {
+        font-size: .5rem;
     }
 }

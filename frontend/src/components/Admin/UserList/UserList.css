@@ -8,7 +8,7 @@
 }
 
 .userlist-heading {
-    font: 400 2rem 'Roboto';
+    font: 400 1.8rem 'Roboto';
     padding: .5vmax;
     color: rgba(0, 0, 0, 0.692);
     transition: all .5s;
@@ -53,5 +53,9 @@
 @media  screen and (max-width: 600px) {
     .userlist-table div {
         font: 300 4vw 'Roboto';
+    }
+
+    .userlist-heading {
+        font-size: 1.4rem;
     }
 }

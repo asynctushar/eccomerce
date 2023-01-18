@@ -13,7 +13,9 @@
     color: tomato;
   }
   .not-found > p {
-    font-size: 2vmax;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem
   }
   .not-found > a {
     background-color: rgb(51, 51, 51);

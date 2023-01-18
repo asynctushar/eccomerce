@@ -9,7 +9,7 @@
 
 .shipping-box {
     width: 35vw;
-    height: 85vh;
+    height: auto;
     background-color: rgba(255, 255, 255, 0.952);
     border-radius: 2px;
     margin-bottom: 3rem;
@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 3rem;
+    padding: 2rem;
     transition: all .5s ease-in;
     gap: 1.5rem;
 }
@@ -44,8 +44,8 @@
 }
 
 .shipping-form > div > input, .shipping-form > div > select {
-    padding: 1vmax 4vmax;
-    padding-right: 1vmax;
+    padding: 1rem 3rem;
+    padding-right: 1rem;
     display: inline-block;
     width: 100%;
     border: 1px solid rgba(29, 24, 24, 0.192);
@@ -55,7 +55,7 @@
 }
 
 .shipping-form > div > svg {
-    transform: translateX(3vmax);
+    transform: translateX(2.5rem);
     /* color:rgba(0, 0, 0, 0.651) */
     color: tomato;
 }
@@ -86,8 +86,12 @@
 
 @media screen  and (max-width: 900px) {
     .shipping-box {
-        width: 70vw;
+        width: 90vw;
     }
+
+.shipping-form {
+    gap: .8rem;
+}
 }
 
 

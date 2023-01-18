@@ -5,7 +5,7 @@ import cartSlice from '../slices/cartSlice';
 
 const { setError, setLoader } = appSlice.actions;
 const {removeAllCartItems } = cartSlice.actions;
-const { createNewOrder, getMyOrders, getSingleOrder, updateOrderStatus, getAllOrders, deleteOrderStatus } = orderSlice.actions;
+const { createNewOrder, getMyOrders, getSingleOrder, updateOrderStatus, getAllOrders, deleteOrderStatus, setOrderLoader } = orderSlice.actions;
 
 // Create New Order
 export const createNewOrderAction = (order) => async (dispatch) => {
@@ -41,9 +41,11 @@ export const getSingleOrderAction = (id) => async (dispatch) => {
     try {
         const { data } = await axios.get(`/api/v1/order/${id}`);
         dispatch(getSingleOrder(data.order));
+        dispatch(setOrderLoader(false))
         
     } catch (err) {
         dispatch(setError(err));
+        dispatch(setOrderLoader(false));
     }
 }
 

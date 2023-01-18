@@ -10,11 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteUserAction, getAllUsersAction, resetDeleteUserStatusAction } from '../../../redux/actions/userAction';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../../redux/actions/appAction';
+import Loader from '../../Loader/Loader';
 
 
 const UserList = () => {
     const dispatch = useDispatch();
-    const { allUsers, isUserDeleted } = useSelector((state) => state.userState);
+    const { allUsers, isUserDeleted, isLoading } = useSelector((state) => state.userState);
     const navigate = useNavigate();
     const alert = useAlert();
     const { error } = useSelector((state) => state.appState);
@@ -102,14 +103,18 @@ const UserList = () => {
 
     return (
         <Fragment>
-            <MetaData title="All Users-Admin" />
-            <div className="dashboard">
-                <SideBar />
-                <div className="userlist-container">
-                    <h1 className="userlist-heading">All Orders</h1>
-                    <DataGrid rows={rows} columns={columns} autoHeight disableSelectionOnClick pageSize={10} rowsPerPageOptions={[10]} className="userlist-table" />
-                </div>
-            </div>
+            {isLoading ? <Loader /> : (
+                <Fragment>
+                    <MetaData title="All Users-Admin" />
+                    <div className="dashboard">
+                        <SideBar />
+                        <div className="userlist-container">
+                            <h1 className="userlist-heading">All Users</h1>
+                            <DataGrid rows={rows} columns={columns} autoHeight disableSelectionOnClick pageSize={10} rowsPerPageOptions={[10]} className="userlist-table" />
+                        </div>
+                    </div>
+                </Fragment>
+            )}
         </Fragment>
     )
 }

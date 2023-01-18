@@ -49,4 +49,8 @@
     .productlist-table div {
         font: 300 4vw 'Roboto';
     }
+
+    .productlist-heading {
+        font: 400 1.3rem 'Roboto';
+    }
 }

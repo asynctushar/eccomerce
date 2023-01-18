@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     orders: [],
-    order: {},
+    order: undefined,
     allOrders: [],
     deleteOrderStatus: false,
-    updateOrderStatus: false
+    updateOrderStatus: false,
+    isLoading: true
 }
 
 const orderSlice = createSlice({
@@ -29,6 +30,9 @@ const orderSlice = createSlice({
         },
         updateOrderStatus: (state, action) => {
             state.updateOrderStatus = action.payload;
+        },
+        setOrderLoader: (state, action) => {
+            state.isLoading = action.payload;
         }
     }
 });

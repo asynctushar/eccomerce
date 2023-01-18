@@ -9,11 +9,13 @@ import { useAlert } from 'react-alert';
 import { useNavigate, useParams } from 'react-router-dom';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import { clearUpdateProductStatusAction, getProductDetailsAction, updateProductAction } from '../../../redux/actions/productAction';
+import Loader from '../../Loader/Loader';
+import NotFound from '../../layout/NotFound/NotFound';
 
 const UpdateProduct = () => {
     const dispatch = useDispatch();
-    const { updateProductStatus, product } = useSelector((state) => state.productState);
-    const { error } = useSelector((state) => state.appState);
+    const { updateProductStatus, product, isLoading } = useSelector((state) => state.productState);
+    const {error} = useSelector((state) => state.appState);
     const alert = useAlert();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -42,7 +44,7 @@ const UpdateProduct = () => {
             dispatch(clearUpdateProductStatusAction());
         }
 
-        if (!product || (product && product._id !== id)) {
+        if (!product) {
             dispatch(getProductDetailsAction(id));
         } else {
             setName(product.name);
@@ -101,58 +103,64 @@ const UpdateProduct = () => {
 
     return (
         <Fragment>
-            <MetaData title="Update Product" />
-            <div className="dashboard">
-                <SideBar />
-                <div className="updateproduct-container">
-                    <form className="updateproduct-form" onSubmit={submitProductHandler}>
-                        <h1> Update Product</h1>
-                        <div>
-                            <Spellcheck />
-                            <input type="text" placeholder="Product Name" required value={name} onChange={(e) => setName(e.target.value)} />
-                        </div>
-                        <div>
-                            <AttachMoney />
-                            <input type="number" placeholder="Product Price" required value={price} onChange={(e) => setPrice(e.target.value)} />
-                        </div>
-                        <div>
-                            <Description />
-                            <textarea placeholder="Product Description" required rows={1} cols={30} value={description} onChange={(e) => setDescription(e.target.value)} />
-                        </div>
-                        <div>
-                            <AccountTree />
-                            <select onChange={(e) => setCategory(e.target.value)} value={category} required  >
-                                <option value='' > Choose Category </option>
-                                {categories.map((item) => (
-                                    <option value={item} key={item}>{item}</option>
-                                )
-                                )}
-                            </select>
-                        </div>
-                        <div>
-                            <Storage />
-                            <input type="number" placeholder="Stock" required value={stock} onChange={(e) => setStock(e.target.value)} />
-                        </div>
-                        <div className="updateproduct-form-file">
-                            <Image />
-                            <input type="file" name="avatar" accept="image/*" multiple onChange={updateProductImagesChange} />
-                        </div>
-                        <div className="updateproduct-form-image">
-                            {oldImages && oldImages.map((item, index) => (
-                                <img src={item.url} alt={`Img-${index + 1}`} key={index} />
-                            ))}
-                        </div>
-                        <div className="updateproduct-form-image">
-                            {imagesPreview && imagesPreview.map((item, index) => (
-                                <img src={item} alt={`Img-${index + 1}`} key={index} />
-                            ))}
-                        </div>
-                        <Button className="updateproduct-btn" type="submit"> Update Product</Button>
-                    </form>
-                </div>
-            </div>
-
-
+            {isLoading ? <Loader /> : (
+                <Fragment>
+                    {!product ? <NotFound /> : (
+                        <Fragment >
+                            <MetaData title="Update Product" />
+                            <div className="dashboard">
+                                <SideBar />
+                                <div className="updateproduct-container">
+                                    <form className="updateproduct-form" onSubmit={submitProductHandler}>
+                                        <h1> Update Product</h1>
+                                        <div>
+                                            <Spellcheck />
+                                            <input type="text" placeholder="Product Name" required value={name} onChange={(e) => setName(e.target.value)} />
+                                        </div>
+                                        <div>
+                                            <AttachMoney />
+                                            <input type="number" placeholder="Product Price" required value={price} onChange={(e) => setPrice(e.target.value)} />
+                                        </div>
+                                        <div>
+                                            <Description />
+                                            <textarea placeholder="Product Description" required rows={1} cols={30} value={description} onChange={(e) => setDescription(e.target.value)} />
+                                        </div>
+                                        <div>
+                                            <AccountTree />
+                                            <select onChange={(e) => setCategory(e.target.value)} value={category} required  >
+                                                <option value='' > Choose Category </option>
+                                                {categories.map((item) => (
+                                                    <option value={item} key={item}>{item}</option>
+                                                )
+                                                )}
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <Storage />
+                                            <input type="number" placeholder="Stock" required value={stock} onChange={(e) => setStock(e.target.value)} />
+                                        </div>
+                                        <div className="updateproduct-form-file">
+                                            <Image />
+                                            <input type="file" name="avatar" accept="image/*" multiple onChange={updateProductImagesChange} />
+                                        </div>
+                                        <div className="updateproduct-form-image">
+                                            {oldImages && oldImages.map((item, index) => (
+                                                <img src={item.url} alt={`Img-${index + 1}`} key={index} />
+                                            ))}
+                                        </div>
+                                        <div className="updateproduct-form-image">
+                                            {imagesPreview && imagesPreview.map((item, index) => (
+                                                <img src={item} alt={`Img-${index + 1}`} key={index} />
+                                            ))}
+                                        </div>
+                                        <Button className="updateproduct-btn" type="submit"> Update Product</Button>
+                                    </form>
+                                </div>
+                            </div>
+                        </Fragment>
+                    )}
+                </Fragment>
+            )}
         </Fragment>
     )
 }

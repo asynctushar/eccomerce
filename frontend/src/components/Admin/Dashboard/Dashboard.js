@@ -92,7 +92,7 @@ const Dashboard = () => {
 
                 <div className="dashboard-summary">
                     <div>
-                        <p>Total Amount <br /> {totalPrice} taka</p>
+                        <p><strong>Total Amount </strong> <br />  {totalPrice} taka</p>
                     </div>
                     <div className="dashboard-summary-box-2">
                         <Link to="/admin/products">

@@ -2,7 +2,7 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword, getAllUsers, updateSingleUser, resetUpdateSingleUserStatus, deleteUser, getSingleUser, resetDeleteUserStatus } = userSlice.actions;
+const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword, getAllUsers, updateSingleUser, resetUpdateSingleUserStatus, deleteUser, getSingleUser, resetDeleteUserStatus, setUserLoader } = userSlice.actions;
 const { setLoader, setError } = appSlice.actions;
 
 // Login User
@@ -126,33 +126,42 @@ export const resetPasswordAction = (token, passwords) => async (dispatch) => {
 // get All users --admin
 export const getAllUsersAction = () => async (dispatch) => {
     try {
+        dispatch(setUserLoader(true));
         const { data } = await axios.get('/api/v1/admin/users');
 
-        dispatch(getAllUsers(data.users))
+        dispatch(getAllUsers(data.users));
+        dispatch(setUserLoader(false));
     } catch (err) {
         dispatch(setError(err));
+        dispatch(setUserLoader(false));
     }
 }
 
 // get Single user --admin 
 export const getSingleUserAction = (id) => async (dispatch) => {
     try {
+        dispatch(setUserLoader(true));
         const { data } = await axios.get(`/api/v1/admin/user/${id}`);
 
-        dispatch(getSingleUser(data.user))
+        dispatch(getSingleUser(data.user));
+        dispatch(setUserLoader(false));
     } catch (err) {
         dispatch(setError(err));
+        dispatch(setUserLoader(false));
     }
 }
 
 // updata Single User --admin 
 export const updateSingleUserAction = (userData, id) => async (dispatch) => {
     try {
+        dispatch(setUserLoader(true));
         const { data } =  await axios.put(`/api/v1/admin/user/${id}`, userData, { headers: { "Content-Type": "application/json" } });
 
-        dispatch(updateSingleUser(data))
+        dispatch(updateSingleUser(data));
+        dispatch(setUserLoader(false));
     } catch (err) {
-        dispatch(setError(err))
+        dispatch(setError(err));
+        dispatch(setUserLoader(false));
     }
 }
 
