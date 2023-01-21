@@ -13,7 +13,6 @@ Hi! My name is **Tushar Biswas**, I have developed this ecommerce application.
 Make Sure to Create a config.env file in backend/config directory and add appropriate variables in order to use the app.
 
 **Essential Variables**
-PORT =
 
 DB_URI =
 
@@ -43,3 +42,4 @@ STRIPE_SECRET_KEY =
 
 ** in case of local server add this variable too:
 FRONTEND_URL =
+PORT = 
