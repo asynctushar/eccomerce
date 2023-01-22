@@ -13,7 +13,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     if (avatar) {
         const myCloud = await cloudinary.uploader.upload(avatar, {
-            folder: '/avatars',
+            folder: 'ecommerce/avatars',
             width: 1000,
             height: 1000,
             crop: "scale"
@@ -178,7 +178,7 @@ exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
     if (avatar) {
 
         const myCloud = await cloudinary.uploader.upload(avatar, {
-            folder: '/avatars',
+            folder: '/ecommerce/avatars',
             width: 1000,
             height: 1000,
             crop: "scale"
