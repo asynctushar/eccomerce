@@ -51,7 +51,7 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = () => {
-        if (quantity >= product.stock) {
+        if (quantity > product.stock) {
             alert.error("Product is out of stock!");
             return;
         }

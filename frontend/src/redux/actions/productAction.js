@@ -71,12 +71,14 @@ export const getAdminAllProductsAction = () => async (dispatch) => {
 // Create New Prouduct --admin
 export const createNewProductAction = (productData) => async (dispatch) => {
     try {
+        dispatch(setProductLoader(true));
         const { data } = await axios.post('/api/v1/admin/product/new', productData, { headers: { "Content-Type": "application/json" } });
 
         dispatch(CreateProductStatus(data.success));
+        dispatch(setProductLoader(false));
     } catch (err) {
-        console.log(err);
         dispatch(setError(err));
+        dispatch(setProductLoader(false));
     }
 }
 
