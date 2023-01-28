@@ -3,7 +3,7 @@ import { NotAccessible } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const OrderSuccess = () => {
+const NotFound = () => {
     return (
         <div className="not-found">
             <NotAccessible />
@@ -13,4 +13,4 @@ const OrderSuccess = () => {
         </div>
     )
 }
-export default OrderSuccess;
+export default NotFound;

@@ -7,6 +7,7 @@ import Loader from '../../Loader/Loader';
 import { useNavigate, useParams } from 'react-router';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../../redux/actions/appAction';
+import MetaData from '../../layout/MetaData';
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
@@ -46,27 +47,30 @@ const ResetPassword = () => {
     }
 
     return (
-        <Fragment >
-            {isLoading ? <Loader /> :
-                <div className="reset-password">
-                    <div className="reset-password-form-container">
-                        <h3 className="reset-password-heading">Reset password</h3>
-                        <form className="reset-password-form" onSubmit={resetPasswordSubmit}>
-                            <div className="regPassword">
-                                <LockOpenIcon />
-                                <input type="password" name="password" placeholder="New Password" value={password} required onChange={(e) => setNewPassword(e.target.value)} />
-                            </div>
-                            <div className="regConfirmPassword">
-                                <LockOpenIcon />
-                                <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required onChange={(e) => setConfirmPassword(e.target.value)} />
-                            </div>
-                            <button className="reset-password-button">
-                                Reset
-                            </button>
-                        </form>
+        <Fragment>
+            <MetaData title="Reset Password" />
+            <Fragment >
+                {isLoading ? <Loader /> :
+                    <div className="reset-password">
+                        <div className="reset-password-form-container">
+                            <h3 className="reset-password-heading">Reset password</h3>
+                            <form className="reset-password-form" onSubmit={resetPasswordSubmit}>
+                                <div className="regPassword">
+                                    <LockOpenIcon />
+                                    <input type="password" name="password" placeholder="New Password" value={password} required onChange={(e) => setNewPassword(e.target.value)} />
+                                </div>
+                                <div className="regConfirmPassword">
+                                    <LockOpenIcon />
+                                    <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required onChange={(e) => setConfirmPassword(e.target.value)} />
+                                </div>
+                                <button className="reset-password-button">
+                                    Reset
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </Fragment>
         </Fragment>
     );
 }

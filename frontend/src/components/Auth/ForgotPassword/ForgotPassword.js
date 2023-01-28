@@ -6,6 +6,7 @@ import { forgotPasswordAction, resetForgotPasswordStatusAction } from '../../../
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import { useAlert } from 'react-alert';
 import Loader from '../../Loader/Loader';
+import MetaData from '../../layout/MetaData';
 
 const ForgotPassword = () => {
     const dispatch = useDispatch();
@@ -36,24 +37,27 @@ const ForgotPassword = () => {
     const onChangeHandler = (e) => setEmail(e.target.value);
 
     return (
-        <Fragment >
-            {isLoading ? <Loader /> :
-                <div className="forgot-password">
-                    <div className="forgot-password-form-container">
-                        <h3 className="forgot-password-heading">Forgot Password</h3>
-                        <p className="forgot-password-description">Enter your email address. We will send you password reset link.</p>
-                        <form className="forgot-password-form" onSubmit={forgotPasswordSubmit}>
-                            <div className="email">
-                                <MailOutlineIcon />
-                                <input type="email" name="email" placeholder="Email" value={email} required onChange={onChangeHandler}/>
-                            </div>
-                            <button className="forgot-password-button">
-                                Send
-                            </button>
-                        </form>
+        <Fragment>
+            <MetaData title="Forgot Password" />
+            <Fragment >
+                {isLoading ? <Loader /> :
+                    <div className="forgot-password">
+                        <div className="forgot-password-form-container">
+                            <h3 className="forgot-password-heading">Forgot Password</h3>
+                            <p className="forgot-password-description">Enter your email address. We will send you password reset link.</p>
+                            <form className="forgot-password-form" onSubmit={forgotPasswordSubmit}>
+                                <div className="email">
+                                    <MailOutlineIcon />
+                                    <input type="email" name="email" placeholder="Email" value={email} required onChange={onChangeHandler} />
+                                </div>
+                                <button className="forgot-password-button">
+                                    Send
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </Fragment>
         </Fragment>
     );
 }

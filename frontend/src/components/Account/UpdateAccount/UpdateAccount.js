@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../../redux/actions/appAction';
 import Loader from '../../Loader/Loader';
+import MetaData from '../../layout/MetaData';
 
 
 const UpdateAccount = () => {
@@ -49,31 +50,34 @@ const UpdateAccount = () => {
     }
 
     return (
-        <Fragment >
-            {isLoading ? <Loader /> :
-                <div className="update-profile">
-                    <div className="update-form-container">
-                        <h3 className="update-profile-heading">Update Profile</h3>
-                        <form className="update-form" onSubmit={updateUserData}>
-                            <div className="update-name">
-                                <PermIdentityIcon />
-                                <input type="text" name="name" placeholder="Name" value={name} required onChange={(e) => setName(e.target.value)} />
-                            </div>
-                            <div className="update-Email">
-                                <MailOutlineIcon />
-                                <input type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                            <div className="update-fileUpload">
-                                <img src={avatarPreview} alt="Avatar" />
-                                <input type="file" name="avatar" placeholder="Upload avatar" accept="image/*" onChange={changeAvatar} />
-                            </div>
-                            <button className="update-button">
-                                Update
-                            </button>
-                        </form>
+        <Fragment>
+            <MetaData title="Update Password" />
+            <Fragment >
+                {isLoading ? <Loader /> :
+                    <div className="update-profile">
+                        <div className="update-form-container">
+                            <h3 className="update-profile-heading">Update Profile</h3>
+                            <form className="update-form" onSubmit={updateUserData}>
+                                <div className="update-name">
+                                    <PermIdentityIcon />
+                                    <input type="text" name="name" placeholder="Name" value={name} required onChange={(e) => setName(e.target.value)} />
+                                </div>
+                                <div className="update-Email">
+                                    <MailOutlineIcon />
+                                    <input type="email" name="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+                                </div>
+                                <div className="update-fileUpload">
+                                    <img src={avatarPreview} alt="Avatar" />
+                                    <input type="file" name="avatar" placeholder="Upload avatar" accept="image/*" onChange={changeAvatar} />
+                                </div>
+                                <button className="update-button">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </Fragment>
         </Fragment>
     );
 }

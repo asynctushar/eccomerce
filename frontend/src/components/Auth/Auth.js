@@ -10,10 +10,12 @@ import { useAlert } from 'react-alert';
 import { clearErrorAction } from '../../redux/actions/appAction';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import Loader from '../Loader/Loader';
+import MetaData from '../layout/MetaData';
 
 const LogIn = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const [authType, setAuthType] = useState("Login");
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -34,7 +36,7 @@ const LogIn = () => {
     const loginRef = useRef();
     const registerRef = useRef(null);
 
-    
+
     useEffect(() => {
         const redirect = location.search ? `/${location.search.split("=")[1]}` : "/account";
         if (isAuthenticated) {
@@ -96,6 +98,7 @@ const LogIn = () => {
 
             loginRef.current.classList.add('active');
             registerRef.current.classList.remove('active');
+            setAuthType("Login");
         }
 
         if (type === 'register') {
@@ -104,66 +107,70 @@ const LogIn = () => {
 
             registerRef.current.classList.add('active');
             loginRef.current.classList.remove('active');
+            setAuthType('Register')
         }
     }
 
     return (
         <Fragment>
-            {isLoading ? <Loader /> :
-                <div className="auth">
-                    <div className="auth-container">
-                        <div className='auth-toggle'>
-                            <p className="login-heading active" onClick={(e) => switchAuthType(e, 'login')}>LOGIN</p>
-                            <p className="register-heading" onClick={(e) => switchAuthType(e, 'register')}>REGISTER</p>
-                        </div>
-                        <div className="form-container">
-                            {/* login form */}
-                            <form className="login-form active" ref={loginRef} onSubmit={loginHandler}>
-                                <div className="loginEmail">
-                                    <MailOutlineIcon />
-                                    <input type="email" name="email" placeholder="Email" autoComplete="on" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-                                </div>
-                                <div className="loginPassword">
-                                    <LockOpenIcon />
-                                    <input type="password" name="password" placeholder="Password" required autoComplete="on" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-                                </div>
-                                <NavLink to="/password/forgot" className="forget-password" >Forget Password?</NavLink>
-                                <button className="login-button">
-                                    Log In
-                                </button>
-                            </form>
+            <MetaData title={authType} />
+            <Fragment>
+                {isLoading ? <Loader /> :
+                    <div className="auth">
+                        <div className="auth-container">
+                            <div className='auth-toggle'>
+                                <p className="login-heading active" onClick={(e) => switchAuthType(e, 'login')}>LOGIN</p>
+                                <p className="register-heading" onClick={(e) => switchAuthType(e, 'register')}>REGISTER</p>
+                            </div>
+                            <div className="form-container">
+                                {/* login form */}
+                                <form className="login-form active" ref={loginRef} onSubmit={loginHandler}>
+                                    <div className="loginEmail">
+                                        <MailOutlineIcon />
+                                        <input type="email" name="email" placeholder="Email" autoComplete="on" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                    </div>
+                                    <div className="loginPassword">
+                                        <LockOpenIcon />
+                                        <input type="password" name="password" placeholder="Password" required autoComplete="on" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                    </div>
+                                    <NavLink to="/password/forgot" className="forget-password" >Forget Password?</NavLink>
+                                    <button className="login-button">
+                                        Log In
+                                    </button>
+                                </form>
 
-                            {/* register  form */}
-                            <form className="register-form" ref={registerRef} onSubmit={registerHandler}>
-                                <div className="regName">
-                                    <PermIdentityIcon />
-                                    <input type="text" name="name" placeholder="Name" value={name} required autoComplete="off" onChange={registerFormChange} />
-                                </div>
-                                <div className="regEmail">
-                                    <MailOutlineIcon />
-                                    <input type="email" name="email" placeholder="Email" value={email} required autoComplete="off" onChange={registerFormChange} />
-                                </div>
-                                <div className="regPassword">
-                                    <LockOpenIcon />
-                                    <input type="password" name="password" placeholder="Password" value={password} required autoComplete="off" onChange={registerFormChange} />
-                                </div>
-                                <div className="regConfirmPassword">
-                                    <LockOpenIcon />
-                                    <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required  autoComplete="off" onChange={registerFormChange} />
-                                </div>
-                                <div className="regFileUpload">
-                                    <img src={avatarPrev} alt="Avatar" />
-                                    <input type="file" name="avatar" placeholder="Upload avatar" accept="image/*" onChange={registerFormChange} />
-                                </div>
-                                <button className="register-button">
-                                    Register
-                                </button>
-                            </form>
+                                {/* register  form */}
+                                <form className="register-form" ref={registerRef} onSubmit={registerHandler}>
+                                    <div className="regName">
+                                        <PermIdentityIcon />
+                                        <input type="text" name="name" placeholder="Name" value={name} required autoComplete="off" onChange={registerFormChange} />
+                                    </div>
+                                    <div className="regEmail">
+                                        <MailOutlineIcon />
+                                        <input type="email" name="email" placeholder="Email" value={email} required autoComplete="off" onChange={registerFormChange} />
+                                    </div>
+                                    <div className="regPassword">
+                                        <LockOpenIcon />
+                                        <input type="password" name="password" placeholder="Password" value={password} required autoComplete="off" onChange={registerFormChange} />
+                                    </div>
+                                    <div className="regConfirmPassword">
+                                        <LockOpenIcon />
+                                        <input type="password" name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} required autoComplete="off" onChange={registerFormChange} />
+                                    </div>
+                                    <div className="regFileUpload">
+                                        <img src={avatarPrev} alt="Avatar" />
+                                        <input type="file" name="avatar" placeholder="Upload avatar" accept="image/*" onChange={registerFormChange} />
+                                    </div>
+                                    <button className="register-button">
+                                        Register
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </Fragment>
+                }
+            </Fragment>
+        </Fragment >
     );
 }
 
