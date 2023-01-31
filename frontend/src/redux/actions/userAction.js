@@ -2,7 +2,7 @@ import userSlice from "../slices/userSlice";
 import appSlice from "../slices/appSlice";
 import axios from 'axios';
 
-const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword, getAllUsers, updateSingleUser, resetUpdateSingleUserStatus, deleteUser, getSingleUser, resetDeleteUserStatus, setUserLoader } = userSlice.actions;
+const { login, register, updateUser, updatePassword, resetUpdateStatus, forgotPassword, resetForgotPasswordStatus, resetPassword, getAllUsers, updateSingleUser, resetUpdateSingleUserStatus, deleteUser, getSingleUser, resetDeleteUserStatus, setUserLoader, setIsUserLoading } = userSlice.actions;
 const { setLoader, setError } = appSlice.actions;
 
 // Login User
@@ -63,27 +63,27 @@ export const logoutUserAction = () => async (dispatch) => {
 // Update User
 export const updateUserAction = (userData) => async (dispatch) => {
     try {
-        dispatch(setLoader(true));
+        dispatch(setIsUserLoading(true));
         const { data } = await axios.put('/api/v1/me/update', userData, { headers: { "Content-Type": "application/json" } });
         dispatch(updateUser(data));
-        dispatch(setLoader(false));
+        dispatch(setIsUserLoading(false));
 
     } catch (err) {
         dispatch(setError(err));
-        dispatch(setLoader(false));
+        dispatch(setIsUserLoading(false));
     }
 }
 // Update Passord
 export const updatePasswordAction = (passwords) => async (dispatch) => {
     try {
-        dispatch(setLoader(true));
+        dispatch(setIsUserLoading(true));
         const { data } = await axios.put('/api/v1/password/update', passwords, { headers: { "Content-Type": "application/json" } });
         dispatch(updatePassword(data));
-        dispatch(setLoader(false));
+        dispatch(setIsUserLoading(false));
 
     } catch (err) {
         dispatch(setError(err));
-        dispatch(setLoader(false));
+        dispatch(setIsUserLoading(false));
     }
 }
 

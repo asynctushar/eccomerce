@@ -11,8 +11,8 @@ import MetaData from '../../layout/MetaData';
 
 const UpdatePassword = () => {
     const dispatch = useDispatch();
-    const { isUpdated } = useSelector(state => state.userState);
-    const { error, isLoading } = useSelector(state => state.appState);
+    const { isUpdated, isUserLoading } = useSelector(state => state.userState);
+    const { error } = useSelector(state => state.appState);
     const alert = useAlert();
     const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const UpdatePassword = () => {
         <Fragment>
             <MetaData title="Update Password" />
             <Fragment >
-                {isLoading ? <Loader /> :
+                {isUserLoading ? <Loader /> :
                     <div className="update-password">
                         <div className="update-form-container">
                             <h3 className="update-password-heading">Change password</h3>

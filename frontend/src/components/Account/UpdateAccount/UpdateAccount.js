@@ -13,8 +13,8 @@ import MetaData from '../../layout/MetaData';
 
 const UpdateAccount = () => {
     const dispatch = useDispatch();
-    const { user, isUpdated } = useSelector(state => state.userState);
-    const { error, isLoading } = useSelector(state => state.appState);
+    const { user, isUpdated, isUserLoading } = useSelector(state => state.userState);
+    const { error} = useSelector(state => state.appState);
     const alert = useAlert();
     const navigate = useNavigate();
 
@@ -53,7 +53,7 @@ const UpdateAccount = () => {
         <Fragment>
             <MetaData title="Update Password" />
             <Fragment >
-                {isLoading ? <Loader /> :
+                {isUserLoading ? <Loader /> :
                     <div className="update-profile">
                         <div className="update-form-container">
                             <h3 className="update-profile-heading">Update Profile</h3>

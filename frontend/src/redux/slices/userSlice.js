@@ -8,7 +8,8 @@ const initialState = {
     singleUser: null,
     allUsers: [],
     isUserDeleted: false,
-    isLoading: true
+    isLoading: true,
+    isUserLoading: false
 }
 
 const userSlice = createSlice({
@@ -66,6 +67,9 @@ const userSlice = createSlice({
         },
         resetDeleteUserStatus: (state, action) => {
             state.isUserDeleted = action.payload;
+        },
+        setIsUserLoading: (state, action) => {
+            state.isUserLoading = action.payload;
         }
     }
 });
